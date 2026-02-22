@@ -3,7 +3,6 @@ import 'package:longpress_popup_example/example_popup_with_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:longpress_popup/fluttermap_markerpopup.dart';
-import 'package:longpress_popup_example/accurate_map_icons.dart';
 import 'package:latlong2/latlong.dart';
 
 import 'example_popup.dart';
@@ -72,41 +71,24 @@ class _MapWithPopupsState extends State<MapWithPopups> {
   List<MarkerData> _buildMarkers() {
     return <Marker>[
       Marker(
-        //
         point: LatLng(44.421, 10.404),
-        width: 40,
-        height: 40,
-        child: const Icon(AccurateMapIcons.locationOnBottomAligned, size: 40),
+        width: 52,
+        height: 52,
+        child: const _ImageMarker(assetPath: 'assets/markers/marker-red.png'),
         alignment: widget.markerAnchorPoint,
       ),
       Marker(
         point: LatLng(45.683, 10.839),
-        width: 20,
-        height: 40,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.black54,
-            border: Border.all(color: Colors.black, width: 0.0),
-            borderRadius: const BorderRadius.all(Radius.elliptical(20, 40)),
-          ),
-          width: 20,
-          height: 40,
-        ),
+        width: 52,
+        height: 52,
+        child: const _ImageMarker(assetPath: 'assets/markers/marker-blue.png'),
         alignment: widget.markerAnchorPoint,
       ),
       Marker(
         point: LatLng(45.246, 5.783),
-        width: 40,
-        height: 20,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.blue.withValues(alpha: 0.5),
-            border: Border.all(color: Colors.black, width: 0.0),
-            borderRadius: const BorderRadius.all(Radius.elliptical(40, 20)),
-          ),
-          width: 40,
-          height: 20,
-        ),
+        width: 52,
+        height: 52,
+        child: const _ImageMarker(assetPath: 'assets/markers/marker-green.png'),
         alignment: widget.markerAnchorPoint,
       ),
     ].map((Marker e) => DataMarker(e)).toList();
@@ -136,6 +118,26 @@ class _MapWithPopupsState extends State<MapWithPopups> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _ImageMarker extends StatelessWidget {
+  const _ImageMarker({required this.assetPath});
+
+  final String assetPath;
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: <BoxShadow>[BoxShadow(color: Colors.black.withValues(alpha: 0.25), blurRadius: 8, offset: const Offset(0, 4))],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: Image.asset(assetPath, fit: BoxFit.cover),
+      ),
     );
   }
 }
