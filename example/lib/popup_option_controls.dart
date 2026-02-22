@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:longpress_popup/fluttermap_markerpopup.dart';
+import 'package:longpress_popup/extension_api.dart';
 
 import 'map_with_popups.dart';
 
@@ -12,7 +11,10 @@ class PopupOptionControls extends StatefulWidget {
 }
 
 class _PopupOptionControlsState extends State<PopupOptionControls> {
-  static const List<AlignmentGeometry> alignments = <AlignmentGeometry>[Alignment.centerLeft, Alignment.topCenter, Alignment.centerRight, Alignment.bottomCenter, Alignment.center];
+  static const List<AlignmentGeometry> alignments = <AlignmentGeometry>[
+    //
+    Alignment.centerLeft, Alignment.topCenter, Alignment.centerRight, Alignment.bottomCenter, Alignment.center,
+  ];
 
   bool rotate = true;
   bool fade = true;
@@ -28,7 +30,7 @@ class _PopupOptionControlsState extends State<PopupOptionControls> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Expanded(
-            child: MapWithPopups(snap: _popupSnap, rotate: rotate, fade: fade, markerAnchorAlign: _markerAnchorAlign, showMultiplePopups: showMultiplePopups),
+            child: MapWithPopups(snap: _popupSnap, rotate: rotate, fade: fade, showMultiplePopups: showMultiplePopups),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -111,10 +113,6 @@ class _PopupOptionControlsState extends State<PopupOptionControls> {
         ],
       ),
     );
-  }
-
-  AnchorAlign get _markerAnchorAlign {
-    return <AlignmentGeometry, AnchorAlign>{Alignment.centerLeft: AnchorAlign.left, Alignment.topCenter: AnchorAlign.top, Alignment.centerRight: AnchorAlign.right, Alignment.bottomCenter: AnchorAlign.bottom, Alignment.center: AnchorAlign.center}[anchorAlignment]!;
   }
 
   PopupSnap get _popupSnap {

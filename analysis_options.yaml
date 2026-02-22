@@ -28,6 +28,8 @@ linter:
         unnecessary_const: false
         file_names: false
         use_function_type_syntax_for_parameters: false
+        flutter_style_todos: true
+        require_trailing_commas: true
         library_private_types_in_public_api: false
         prefer_function_declarations_over_variables: false
         prefer_interpolation_to_compose_strings: false

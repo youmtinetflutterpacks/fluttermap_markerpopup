@@ -7,7 +7,6 @@ import 'package:longpress_popup/extension_api.dart';
 import 'package:longpress_popup/src/markerdata.dart';
 
 import 'popup_controller_impl.dart';
-import 'popup_event.dart';
 
 class PopupLayer extends StatefulWidget {
   final MapCamera mapState;

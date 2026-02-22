@@ -1,3 +1,4 @@
+import 'package:longpress_popup/extension_api.dart';
 import 'package:longpress_popup_example/example_popup_with_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -11,10 +12,10 @@ class MapWithPopups extends StatefulWidget {
   final PopupSnap snap;
   final bool rotate;
   final bool fade;
-  final AnchorAlign markerAnchorAlign;
+  final Alignment? markerAnchorPoint;
   final bool showMultiplePopups;
 
-  const MapWithPopups({required this.snap, required this.rotate, required this.fade, required this.markerAnchorAlign, required this.showMultiplePopups, Key? key}) : super(key: key);
+  const MapWithPopups({required this.snap, required this.rotate, required this.fade, this.markerAnchorPoint, required this.showMultiplePopups, Key? key}) : super(key: key);
 
   @override
   State<MapWithPopups> createState() => _MapWithPopupsState();
@@ -38,7 +39,7 @@ class _MapWithPopupsState extends State<MapWithPopups> {
     super.didUpdateWidget(oldWidget);
 
     final List<MarkerData> selectedMarkers = _popupLayerController.selectedMarkers;
-    if (widget.markerAnchorAlign != oldWidget.markerAnchorAlign) {
+    if (widget.markerAnchorPoint != oldWidget.markerAnchorPoint) {
       setState(() {
         _markers = _buildMarkers();
       });
@@ -70,7 +71,14 @@ class _MapWithPopupsState extends State<MapWithPopups> {
 
   List<MarkerData> _buildMarkers() {
     return <Marker>[
-      Marker(point: LatLng(44.421, 10.404), width: 40, height: 40, child: const Icon(AccurateMapIcons.locationOnBottomAligned, size: 40), anchorPos: AnchorPos.align(widget.markerAnchorAlign)),
+      Marker(
+        //
+        point: LatLng(44.421, 10.404),
+        width: 40,
+        height: 40,
+        child: const Icon(AccurateMapIcons.locationOnBottomAligned, size: 40),
+        alignment: widget.markerAnchorPoint,
+      ),
       Marker(
         point: LatLng(45.683, 10.839),
         width: 20,
@@ -84,7 +92,7 @@ class _MapWithPopupsState extends State<MapWithPopups> {
           width: 20,
           height: 40,
         ),
-        anchorPos: AnchorPos.align(widget.markerAnchorAlign),
+        alignment: widget.markerAnchorPoint,
       ),
       Marker(
         point: LatLng(45.246, 5.783),
@@ -99,7 +107,7 @@ class _MapWithPopupsState extends State<MapWithPopups> {
           width: 40,
           height: 20,
         ),
-        anchorPos: AnchorPos.align(widget.markerAnchorAlign),
+        alignment: widget.markerAnchorPoint,
       ),
     ].map((Marker e) => DataMarker(e)).toList();
   }
@@ -118,7 +126,7 @@ class _MapWithPopupsState extends State<MapWithPopups> {
             popupController: _popupLayerController,
             popupBuilder: (BuildContext context, MarkerData marker) => ExamplePopup(marker),
             markerRotate: widget.rotate,
-            markerRotateAlignment: PopupMarkerLayerOptions.rotationAlignmentFor(widget.markerAnchorAlign),
+            markerRotateAlignment: widget.markerAnchorPoint,
             popupAnimation: widget.fade ? const PopupAnimation.fade(duration: Duration(milliseconds: 700)) : null,
             markerLongPressBehavior: widget.showMultiplePopups ? MarkerLongPressBehavior.togglePopup() : MarkerLongPressBehavior.togglePopupAndHideRest(),
             onPopupEvent: (PopupEvent event, List<MarkerData> selectedMarkers) {

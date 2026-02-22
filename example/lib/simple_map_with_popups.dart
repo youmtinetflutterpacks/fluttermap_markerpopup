@@ -1,3 +1,4 @@
+import 'package:longpress_popup/extension_api.dart';
 import 'package:longpress_popup_example/example_popup_with_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -49,7 +50,6 @@ class SimpleMapWithPopups extends StatelessWidget {
             width: 40,
             height: 40,
             child: Icon(Icons.location_on, size: 40),
-            alignment: AnchorPos.align(AnchorAlign.top),
           ),
         );
       },

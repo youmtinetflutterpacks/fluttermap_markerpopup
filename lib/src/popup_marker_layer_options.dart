@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:longpress_popup/src/anchor_align.dart';
 import 'package:longpress_popup/src/marker_tap_behavior.dart';
 import 'package:longpress_popup/src/markerdata.dart';
 import 'package:longpress_popup/src/popup_animation.dart';
@@ -56,9 +57,33 @@ class PopupMarkerLayerOptions extends MarkerLayer {
          //
          markers: markersData.map((MarkerData e) => e.marker).toList(),
          rotate: markerRotate ?? false,
-         rotateAlignment: markerRotateAlignment,
-         rotateOrigin: markerRotateOrigin,
+         alignment: geometryFor(markerRotateAlignment ?? rotationAlignmentFor(AnchorAlign.top)),
+         //  rotateOrigin: markerRotateOrigin,
        );
+
+  static Alignment geometryFor(AlignmentGeometry geometry) {
+    switch (geometry) {
+      case Alignment.centerLeft:
+        return Alignment.centerLeft;
+      case Alignment.topCenter:
+        return Alignment.topCenter;
+      case Alignment.centerRight:
+        return Alignment.centerRight;
+      case Alignment.bottomCenter:
+        return Alignment.bottomCenter;
+      case Alignment.topLeft:
+        return Alignment.topLeft;
+      case Alignment.topRight:
+        return Alignment.topRight;
+      case Alignment.bottomLeft:
+        return Alignment.bottomLeft;
+      case Alignment.bottomRight:
+        return Alignment.bottomRight;
+      case Alignment.center:
+      default:
+        return Alignment.center;
+    }
+  }
 
   static AlignmentGeometry rotationAlignmentFor(AnchorAlign anchorAlign) {
     switch (anchorAlign) {
