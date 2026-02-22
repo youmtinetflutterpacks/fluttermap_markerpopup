@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Semantic Versioning](https://semver.org/).
 
+## [3.0.0] - 2024-06-15
+### Added
+- Added `AnchorAlign` support and related APIs to control marker anchor/alignment behavior.
+- Added richer popup option handling in the example app (snap/alignment controls and multi-popup behavior toggles).
+### Changed
+- Refactored package and example integration to align with newer `flutter_map` APIs.
+- Updated popup/marker layer option plumbing and controller usage across core `lib/src` components.
+### Deprecated
+- None.
+### Removed
+- No public features removed in this release.
+
 ## [2.0.0] - 2023-08-24
 
 ### Added
