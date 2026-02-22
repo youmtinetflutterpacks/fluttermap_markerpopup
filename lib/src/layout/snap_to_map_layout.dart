@@ -1,60 +1,35 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_map/plugin_api.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:vector_math/vector_math_64.dart' show Vector3;
 
 import 'popup_layout.dart';
 
 abstract class SnapToMapLayout {
-  static PopupLayout left(FlutterMapState mapState) {
-    return _layoutWith(
-      contentAlignment: Alignment.centerLeft,
-      mapRotationRad: mapState.rotationRad,
-      translateX: _sizeChangeDueToRotation(mapState).x / 2,
-    );
+  static PopupLayout left(MapCamera mapState) {
+    return _layoutWith(contentAlignment: Alignment.centerLeft, mapRotationRad: mapState.rotationRad, translateX: _sizeChangeDueToRotation(mapState).dx / 2);
   }
 
-  static PopupLayout top(FlutterMapState mapState) {
-    return _layoutWith(
-      contentAlignment: Alignment.topCenter,
-      mapRotationRad: mapState.rotationRad,
-      translateY: _sizeChangeDueToRotation(mapState).y / 2,
-    );
+  static PopupLayout top(MapCamera mapState) {
+    return _layoutWith(contentAlignment: Alignment.topCenter, mapRotationRad: mapState.rotationRad, translateY: _sizeChangeDueToRotation(mapState).dy / 2);
   }
 
-  static PopupLayout right(FlutterMapState mapState) {
-    return _layoutWith(
-      contentAlignment: Alignment.centerRight,
-      mapRotationRad: mapState.rotationRad,
-      translateX: -_sizeChangeDueToRotation(mapState).x / 2,
-    );
+  static PopupLayout right(MapCamera mapState) {
+    return _layoutWith(contentAlignment: Alignment.centerRight, mapRotationRad: mapState.rotationRad, translateX: -_sizeChangeDueToRotation(mapState).dx / 2);
   }
 
-  static PopupLayout bottom(FlutterMapState mapState) {
-    return _layoutWith(
-      contentAlignment: Alignment.bottomCenter,
-      mapRotationRad: mapState.rotationRad,
-      translateY: -_sizeChangeDueToRotation(mapState).y / 2,
-    );
+  static PopupLayout bottom(MapCamera mapState) {
+    return _layoutWith(contentAlignment: Alignment.bottomCenter, mapRotationRad: mapState.rotationRad, translateY: -_sizeChangeDueToRotation(mapState).dy / 2);
   }
 
-  static PopupLayout center(FlutterMapState mapState) {
-    return _layoutWith(
-      contentAlignment: Alignment.center,
-      mapRotationRad: mapState.rotationRad,
-    );
+  static PopupLayout center(MapCamera mapState) {
+    return _layoutWith(contentAlignment: Alignment.center, mapRotationRad: mapState.rotationRad);
   }
 
-  static CustomPoint<num> _sizeChangeDueToRotation(FlutterMapState mapState) {
-    final CustomPoint<num> size = mapState.size;
-    return size - (mapState.size);
+  static Offset _sizeChangeDueToRotation(MapCamera mapState) {
+    return Offset(mapState.size.width - mapState.nonRotatedSize.width, mapState.size.height - mapState.nonRotatedSize.height);
   }
 
-  static PopupLayout _layoutWith({
-    required Alignment contentAlignment,
-    required double mapRotationRad,
-    double translateX = 0.0,
-    double translateY = 0.0,
-  }) {
+  static PopupLayout _layoutWith({required Alignment contentAlignment, required double mapRotationRad, double translateX = 0.0, double translateY = 0.0}) {
     return PopupLayout(
       contentAlignment: contentAlignment,
       rotationAlignment: Alignment.center,

@@ -12,51 +12,29 @@ class PopupControllerImpl implements PopupController {
   /// one. This is for internal use.
   final Set<MarkerWithKey> selectedMarkersWithKeys;
 
-  PopupControllerImpl({List<MarkerData> initiallySelectedMarkers = const []})
-    : selectedMarkersWithKeys = LinkedHashSet.from(
-        initiallySelectedMarkers.map((marker) => MarkerWithKey(marker)),
-      );
+  PopupControllerImpl({List<MarkerData> initiallySelectedMarkers = const <MarkerData>[]}) : selectedMarkersWithKeys = LinkedHashSet<MarkerWithKey>.from(initiallySelectedMarkers.map((MarkerData marker) => MarkerWithKey(marker)));
 
   @override
-  List<MarkerData> get selectedMarkers => selectedMarkersWithKeys
-      .map((markerWithKey) => markerWithKey.marker)
-      .toList();
+  List<MarkerData> get selectedMarkers => selectedMarkersWithKeys.map((MarkerWithKey markerWithKey) => markerWithKey.marker).toList();
 
   @override
-  void showPopupsAlsoFor(
-    List<MarkerData> markers, {
-    bool disableAnimation = false,
-  }) {
-    streamController?.add(
-      PopupEvent.showAlsoFor(markers, disableAnimation: disableAnimation),
-    );
+  void showPopupsAlsoFor(List<MarkerData> markers, {bool disableAnimation = false}) {
+    streamController?.add(PopupEvent.showAlsoFor(markers, disableAnimation: disableAnimation));
   }
 
   @override
-  void showPopupsOnlyFor(
-    List<MarkerData> markers, {
-    bool disableAnimation = false,
-  }) {
-    streamController?.add(
-      PopupEvent.showOnlyFor(markers, disableAnimation: disableAnimation),
-    );
+  void showPopupsOnlyFor(List<MarkerData> markers, {bool disableAnimation = false}) {
+    streamController?.add(PopupEvent.showOnlyFor(markers, disableAnimation: disableAnimation));
   }
 
   @override
   void hideAllPopups({bool disableAnimation = false}) {
-    streamController?.add(
-      PopupEvent.hideAll(disableAnimation: disableAnimation),
-    );
+    streamController?.add(PopupEvent.hideAll(disableAnimation: disableAnimation));
   }
 
   @override
-  void hidePopupsOnlyFor(
-    List<MarkerData> markers, {
-    bool disableAnimation = false,
-  }) {
-    streamController?.add(
-      PopupEvent.hideOnlyFor(markers, disableAnimation: disableAnimation),
-    );
+  void hidePopupsOnlyFor(List<MarkerData> markers, {bool disableAnimation = false}) {
+    streamController?.add(PopupEvent.hideOnlyFor(markers, disableAnimation: disableAnimation));
   }
 
   @override

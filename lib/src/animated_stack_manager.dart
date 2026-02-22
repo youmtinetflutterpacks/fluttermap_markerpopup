@@ -11,13 +11,7 @@ class AnimatedStackManager<E> {
 
   final Duration duration;
 
-  AnimatedStackManager({
-    required this.animatedStackKey,
-    required this.removedItemBuilder,
-    Iterable<E>? initialItems,
-    Duration? duration,
-  }) : _items = List<E>.from(initialItems ?? <E>[]),
-       duration = duration ?? _kDuration;
+  AnimatedStackManager({required this.animatedStackKey, required this.removedItemBuilder, Iterable<E>? initialItems, Duration? duration}) : _items = List<E>.from(initialItems ?? <E>[]), duration = duration ?? _kDuration;
 
   final GlobalKey<AnimatedStackState> animatedStackKey;
   final RemovedItemBuilder<E> removedItemBuilder;
@@ -33,10 +27,7 @@ class AnimatedStackManager<E> {
   E removeAt(int index, {Duration? duration}) {
     final E removedItem = _items.removeAt(index);
     if (removedItem != null) {
-      _animatedStack!.removeItem(index, (
-        BuildContext context,
-        Animation<double> animation,
-      ) {
+      _animatedStack!.removeItem(index, (BuildContext context, Animation<double> animation) {
         return removedItemBuilder(removedItem, context, animation);
       }, duration: duration ?? this.duration);
     }
@@ -44,12 +35,9 @@ class AnimatedStackManager<E> {
   }
 
   void clear({Duration? duration}) {
-    for (var i = 0; i <= _items.length - 1; i++) {
-      final item = _items[i];
-      _animatedStack!.removeItem(0, (
-        BuildContext context,
-        Animation<double> animation,
-      ) {
+    for (int i = 0; i <= _items.length - 1; i++) {
+      final E item = _items[i];
+      _animatedStack!.removeItem(0, (BuildContext context, Animation<double> animation) {
         return removedItemBuilder(item, context, animation);
       }, duration: duration ?? this.duration);
     }
@@ -57,19 +45,16 @@ class AnimatedStackManager<E> {
   }
 
   void removeWhere(bool Function(E) test, {Duration? duration}) {
-    var offsetDueToRemovals = 0;
-    final itemsLength = _items.length;
+    int offsetDueToRemovals = 0;
+    final int itemsLength = _items.length;
 
-    for (var i = 0; i <= itemsLength - 1; i++) {
-      final removalIndex = i - offsetDueToRemovals;
-      final item = _items[removalIndex];
+    for (int i = 0; i <= itemsLength - 1; i++) {
+      final int removalIndex = i - offsetDueToRemovals;
+      final E item = _items[removalIndex];
       if (!test(item)) continue;
 
       _items.removeAt(removalIndex);
-      _animatedStack!.removeItem(removalIndex, (
-        BuildContext context,
-        Animation<double> animation,
-      ) {
+      _animatedStack!.removeItem(removalIndex, (BuildContext context, Animation<double> animation) {
         return removedItemBuilder(item, context, animation);
       }, duration: duration ?? this.duration);
 
@@ -92,5 +77,4 @@ class AnimatedStackManager<E> {
   bool get isNotEmpty => _items.isNotEmpty;
 }
 
-typedef RemovedItemBuilder<E> =
-    Widget Function(E item, BuildContext context, Animation<double> animation);
+typedef RemovedItemBuilder<E> = Widget Function(E item, BuildContext context, Animation<double> animation);

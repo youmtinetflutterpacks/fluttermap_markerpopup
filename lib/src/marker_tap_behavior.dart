@@ -2,8 +2,7 @@ import '../fluttermap_markerpopup.dart';
 
 /// Controls what happens when a MarkerData is longpressed.
 class MarkerLongPressBehavior {
-  final Function(MarkerData marker, PopupController popupController)
-  _onLongPress;
+  final Function(MarkerData marker, PopupController popupController) _onLongPress;
 
   /// Toggle the popup of the longpressed marker and hide all other popups. This is
   /// the recommended behavior if you only want to show one popup at a time.
@@ -12,7 +11,7 @@ class MarkerLongPressBehavior {
         if (popupController.selectedMarkers.contains(marker)) {
           popupController.hideAllPopups();
         } else {
-          popupController.showPopupsOnlyFor([marker]);
+          popupController.showPopupsOnlyFor(<MarkerData>[marker]);
         }
       });
 
@@ -26,15 +25,10 @@ class MarkerLongPressBehavior {
 
   /// Do nothing when longpressing the marker. This is useful if you want to control
   /// popups exclusively with the [PopupController].
-  MarkerLongPressBehavior.none(
-    Function(MarkerData marker, PopupController popupController) onLongPress,
-  ) : _onLongPress = ((_, __) {});
+  MarkerLongPressBehavior.none(Function(MarkerData marker, PopupController popupController) onLongPress) : _onLongPress = ((_, __) {});
 
   /// Define your own custom behavior when longpressing a marker.
-  MarkerLongPressBehavior.custom(
-    Function(MarkerData marker, PopupController popupController) onLongPress,
-  ) : _onLongPress = onLongPress;
+  MarkerLongPressBehavior.custom(Function(MarkerData marker, PopupController popupController) onLongPress) : _onLongPress = onLongPress;
 
-  void apply(MarkerData marker, PopupController popupController) =>
-      _onLongPress(marker, popupController);
+  void apply(MarkerData marker, PopupController popupController) => _onLongPress(marker, popupController);
 }

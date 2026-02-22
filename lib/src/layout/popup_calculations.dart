@@ -1,4 +1,5 @@
-import 'package:flutter_map/plugin_api.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:longpress_popup/src/markerdata.dart';
 
 import 'oval_bounds.dart';
@@ -37,62 +38,36 @@ abstract class PopupCalculations {
   /// The distance from the [marker] center to the horizontal bounds at a given
   /// rotation.
   static double boundXAtRotation(MarkerData marker, double radians) {
-    return OvalBounds.boundX(
-      marker.marker.width,
-      marker.marker.height,
-      radians,
-    );
+    return OvalBounds.boundX(marker.marker.width, marker.marker.height, radians);
   }
 
   /// The distance from the [marker] center to the vertical bounds at a given
   /// rotation.
   static double boundYAtRotation(MarkerData marker, double radians) {
-    return OvalBounds.boundY(
-      marker.marker.width,
-      marker.marker.height,
-      radians,
-    );
+    return OvalBounds.boundY(marker.marker.width, marker.marker.height, radians);
   }
 
-  static double mapLeftToPointX(
-    FlutterMapState mapState,
-    CustomPoint<num> point,
-  ) {
-    return point.x.toDouble();
+  static double mapLeftToPointX(MapCamera mapState, Offset point) {
+    return point.dx;
   }
 
-  static double mapRightToPointX(
-    FlutterMapState mapState,
-    CustomPoint<num> point,
-  ) {
-    return -(mapState.size.x - point.x).toDouble();
+  static double mapRightToPointX(MapCamera mapState, Offset point) {
+    return -(mapState.size.width - point.dx);
   }
 
-  static double mapCenterToPointX(
-    FlutterMapState mapState,
-    CustomPoint<num> point,
-  ) {
-    return -(mapState.size.x / 2 - point.x).toDouble();
+  static double mapCenterToPointX(MapCamera mapState, Offset point) {
+    return -(mapState.size.width / 2 - point.dx);
   }
 
-  static double mapTopToPointY(
-    FlutterMapState mapState,
-    CustomPoint<num> point,
-  ) {
-    return point.y.toDouble();
+  static double mapTopToPointY(MapCamera mapState, Offset point) {
+    return point.dy;
   }
 
-  static double mapBottomToPointY(
-    FlutterMapState mapState,
-    CustomPoint<num> point,
-  ) {
-    return -(mapState.size.y - point.y).toDouble();
+  static double mapBottomToPointY(MapCamera mapState, Offset point) {
+    return -(mapState.size.height - point.dy);
   }
 
-  static double mapCenterToPointY(
-    FlutterMapState mapState,
-    CustomPoint<num> point,
-  ) {
-    return -(mapState.size.y / 2 - point.y).toDouble();
+  static double mapCenterToPointY(MapCamera mapState, Offset point) {
+    return -(mapState.size.height / 2 - point.dy);
   }
 }

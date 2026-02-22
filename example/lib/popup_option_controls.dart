@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/plugin_api.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:longpress_popup/fluttermap_markerpopup.dart';
 
 import 'map_with_popups.dart';
@@ -12,13 +12,7 @@ class PopupOptionControls extends StatefulWidget {
 }
 
 class _PopupOptionControlsState extends State<PopupOptionControls> {
-  static const List<AlignmentGeometry> alignments = [
-    Alignment.centerLeft,
-    Alignment.topCenter,
-    Alignment.centerRight,
-    Alignment.bottomCenter,
-    Alignment.center,
-  ];
+  static const List<AlignmentGeometry> alignments = <AlignmentGeometry>[Alignment.centerLeft, Alignment.topCenter, Alignment.centerRight, Alignment.bottomCenter, Alignment.center];
 
   bool rotate = true;
   bool fade = true;
@@ -32,25 +26,19 @@ class _PopupOptionControlsState extends State<PopupOptionControls> {
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: <Widget>[
           Expanded(
-            child: MapWithPopups(
-              snap: _popupSnap,
-              rotate: rotate,
-              fade: fade,
-              markerAnchorAlign: _markerAnchorAlign,
-              showMultiplePopups: showMultiplePopups,
-            ),
+            child: MapWithPopups(snap: _popupSnap, rotate: rotate, fade: fade, markerAnchorAlign: _markerAnchorAlign, showMultiplePopups: showMultiplePopups),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: <Widget>[
                 ToggleButtons(
                   textStyle: const TextStyle(fontSize: 16),
-                  isSelected: [snapToMarker, rotate, fade],
+                  isSelected: <bool>[snapToMarker, rotate, fade],
                   onPressed: (int index) {
                     setState(() {
                       if (index == 0) snapToMarker = !snapToMarker;
@@ -58,114 +46,63 @@ class _PopupOptionControlsState extends State<PopupOptionControls> {
                       if (index == 2) fade = !fade;
                     });
                   },
-                  children: [
+                  children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: const [
-                          Icon(Icons.messenger),
-                          Text(' Snap to Marker'),
-                        ],
-                      ),
+                      child: Row(children: const <Widget>[Icon(Icons.messenger), Text(' Snap to Marker')]),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: const [
-                          Icon(Icons.rotate_right),
-                          Text(' Rotate')
-                        ],
-                      ),
+                      child: Row(children: const <Widget>[Icon(Icons.rotate_right), Text(' Rotate')]),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: const [
-                          Icon(Icons.animation),
-                          Text(' Fade'),
-                        ],
-                      ),
+                      child: Row(children: const <Widget>[Icon(Icons.animation), Text(' Fade')]),
                     ),
                   ],
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      '\nPopup snap ',
-                      style: TextStyle(fontSize: 18),
-                    ),
+                  children: <Widget>[
+                    const Text('\nPopup snap ', style: TextStyle(fontSize: 18)),
                     ToggleButtons(
-                      isSelected: List.generate(alignments.length,
-                          (index) => popupAlignment == alignments[index]),
+                      isSelected: List<bool>.generate(alignments.length, (int index) => popupAlignment == alignments[index]),
                       onPressed: (int index) {
                         setState(() {
                           popupAlignment = alignments[index];
                         });
                       },
-                      children: [
-                        Icons.arrow_back,
-                        Icons.arrow_upward,
-                        Icons.arrow_forward,
-                        Icons.arrow_downward,
-                        Icons.filter_center_focus_rounded,
-                      ]
-                          .map(
-                            (icon) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(icon),
-                            ),
-                          )
-                          .toList(),
+                      children: <IconData>[Icons.arrow_back, Icons.arrow_upward, Icons.arrow_forward, Icons.arrow_downward, Icons.filter_center_focus_rounded].map((IconData icon) => Padding(padding: const EdgeInsets.all(8.0), child: Icon(icon))).toList(),
                     ),
                   ],
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      '\nMarker Anchor',
-                      style: TextStyle(fontSize: 18),
-                    ),
+                  children: <Widget>[
+                    const Text('\nMarker Anchor', style: TextStyle(fontSize: 18)),
                     ToggleButtons(
-                      isSelected: List.generate(alignments.length,
-                          (index) => anchorAlignment == alignments[index]),
+                      isSelected: List<bool>.generate(alignments.length, (int index) => anchorAlignment == alignments[index]),
                       onPressed: (int index) {
                         setState(() {
                           anchorAlignment = alignments[index];
                         });
                       },
-                      children: [
-                        Icons.arrow_back,
-                        Icons.arrow_upward,
-                        Icons.arrow_forward,
-                        Icons.arrow_downward,
-                        Icons.filter_center_focus_rounded,
-                      ]
-                          .map(
-                            (icon) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(icon),
-                            ),
-                          )
-                          .toList(),
+                      children: <IconData>[Icons.arrow_back, Icons.arrow_upward, Icons.arrow_forward, Icons.arrow_downward, Icons.filter_center_focus_rounded].map((IconData icon) => Padding(padding: const EdgeInsets.all(8.0), child: Icon(icon))).toList(),
                     ),
                   ],
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      '\nShow multiple',
-                      style: TextStyle(fontSize: 18),
-                    ),
+                  children: <Widget>[
+                    const Text('\nShow multiple', style: TextStyle(fontSize: 18)),
                     Switch(
-                        value: showMultiplePopups,
-                        onChanged: (newValue) {
-                          setState(() {
-                            showMultiplePopups = newValue;
-                          });
-                        })
+                      value: showMultiplePopups,
+                      onChanged: (bool newValue) {
+                        setState(() {
+                          showMultiplePopups = newValue;
+                        });
+                      },
+                    ),
                   ],
                 ),
               ],
@@ -177,32 +114,14 @@ class _PopupOptionControlsState extends State<PopupOptionControls> {
   }
 
   AnchorAlign get _markerAnchorAlign {
-    return <AlignmentGeometry, AnchorAlign>{
-      Alignment.centerLeft: AnchorAlign.left,
-      Alignment.topCenter: AnchorAlign.top,
-      Alignment.centerRight: AnchorAlign.right,
-      Alignment.bottomCenter: AnchorAlign.bottom,
-      Alignment.center: AnchorAlign.center,
-    }[anchorAlignment]!;
+    return <AlignmentGeometry, AnchorAlign>{Alignment.centerLeft: AnchorAlign.left, Alignment.topCenter: AnchorAlign.top, Alignment.centerRight: AnchorAlign.right, Alignment.bottomCenter: AnchorAlign.bottom, Alignment.center: AnchorAlign.center}[anchorAlignment]!;
   }
 
   PopupSnap get _popupSnap {
     if (snapToMarker) {
-      return <AlignmentGeometry, PopupSnap>{
-        Alignment.centerLeft: PopupSnap.markerLeft,
-        Alignment.topCenter: PopupSnap.markerTop,
-        Alignment.centerRight: PopupSnap.markerRight,
-        Alignment.bottomCenter: PopupSnap.markerBottom,
-        Alignment.center: PopupSnap.markerCenter,
-      }[popupAlignment]!;
+      return <AlignmentGeometry, PopupSnap>{Alignment.centerLeft: PopupSnap.markerLeft, Alignment.topCenter: PopupSnap.markerTop, Alignment.centerRight: PopupSnap.markerRight, Alignment.bottomCenter: PopupSnap.markerBottom, Alignment.center: PopupSnap.markerCenter}[popupAlignment]!;
     } else {
-      return <AlignmentGeometry, PopupSnap>{
-        Alignment.centerLeft: PopupSnap.mapLeft,
-        Alignment.topCenter: PopupSnap.mapTop,
-        Alignment.centerRight: PopupSnap.mapRight,
-        Alignment.bottomCenter: PopupSnap.mapBottom,
-        Alignment.center: PopupSnap.mapCenter,
-      }[popupAlignment]!;
+      return <AlignmentGeometry, PopupSnap>{Alignment.centerLeft: PopupSnap.mapLeft, Alignment.topCenter: PopupSnap.mapTop, Alignment.centerRight: PopupSnap.mapRight, Alignment.bottomCenter: PopupSnap.mapBottom, Alignment.center: PopupSnap.mapCenter}[popupAlignment]!;
     }
   }
 }

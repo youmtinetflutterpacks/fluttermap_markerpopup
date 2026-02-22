@@ -7,11 +7,7 @@ import 'package:latlong2/latlong.dart';
 import 'example_popup.dart';
 
 class SimpleMapWithPopups extends StatelessWidget {
-  final List<LatLng> _markerPositions = [
-    LatLng(44.421, 10.404),
-    LatLng(45.683, 10.839),
-    LatLng(45.246, 5.783),
-  ];
+  final List<LatLng> _markerPositions = <LatLng>[LatLng(44.421, 10.404), LatLng(45.683, 10.839), LatLng(45.246, 5.783)];
 
   /// Used to trigger showing/hiding of popups.
   final PopupController _popupLayerController = PopupController();
@@ -22,39 +18,41 @@ class SimpleMapWithPopups extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlutterMap(
       options: MapOptions(
-        zoom: 5.0,
-        center: LatLng(44.421, 10.404),
-        onTap: (_, __) => _popupLayerController
-            .hideAllPopups(), // Hide popup when the map is tapped.
+        initialZoom: 5.0,
+        initialCenter: LatLng(44.421, 10.404),
+        onTap: (_, __) => _popupLayerController.hideAllPopups(), // Hide popup when the map is tapped.
       ),
-      children: [
-        TileLayer(
-          urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-          subdomains: ['a', 'b', 'c'],
-        ),
+      children: <Widget>[
+        TileLayer(urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', subdomains: <String>['a', 'b', 'c']),
         PopupMarkerLayerWidget(
           options: PopupMarkerLayerOptions(
+            //
             popupController: _popupLayerController,
             markersData: _markers,
-            markerRotateAlignment:
-                PopupMarkerLayerOptions.rotationAlignmentFor(AnchorAlign.top),
-            popupBuilder: (BuildContext context, MarkerData marker) =>
-                ExamplePopup(marker),
+            markerRotateAlignment: PopupMarkerLayerOptions.rotationAlignmentFor(AnchorAlign.top),
+            popupBuilder: (BuildContext context, MarkerData marker) => ExamplePopup(marker),
           ),
         ),
       ],
     );
   }
 
-  List<MarkerData> get _markers => _markerPositions
-      .map((markerPosition) => DataMarker(
-            Marker(
-              point: markerPosition,
-              width: 40,
-              height: 40,
-              builder: (_) => const Icon(Icons.location_on, size: 40),
-              anchorPos: AnchorPos.align(AnchorAlign.top),
-            ),
-          ))
-      .toList();
+  List<MarkerData> get _markers {
+    return _markerPositions.map(
+      //
+      (LatLng markerPosition) {
+        return DataMarker(
+          //
+          Marker(
+            //
+            point: markerPosition,
+            width: 40,
+            height: 40,
+            child: Icon(Icons.location_on, size: 40),
+            alignment: AnchorPos.align(AnchorAlign.top),
+          ),
+        );
+      },
+    ).toList();
+  }
 }

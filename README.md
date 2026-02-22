@@ -1,9 +1,19 @@
 # longpress_popup
 # This is a Fork of [flutter_map_marker_popup](https://github.com/rorystephenson/flutter_map_marker_popup) by [@rorystephenson](https://github.com/rorystephenson).
 
-[![pub.dev](https://img.shields.io/pub/v/longpress_popup.svg)](https://pub.dev/packages/longpress_popup)
-[![GitHub stars](https://img.shields.io/github/stars/ymrabti/fluttermap_markerpopup?style=social)](https://github.com/ymrabti/fluttermap_markerpopup/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/ymrabti/fluttermap_markerpopup?style=social)](https://github.com/ymrabti/fluttermap_markerpopup/network)
+[![pub package](https://img.shields.io/pub/v/longpress_popup.svg)](https://pub.dev/packages/longpress_popup)
+[![pub likes](https://img.shields.io/pub/likes/longpress_popup.svg)](https://pub.dev/packages/longpress_popup/score)
+[![pub points](https://img.shields.io/pub/points/longpress_popup.svg?color=blue)](https://pub.dev/packages/longpress_popup/score)
+[![platform](https://img.shields.io/badge/platform-flutter-blue)](https://flutter.dev)
+
+[![GitHub stars](https://img.shields.io/github/stars/ymrabti/fluttermap_markerpopup.svg?style=flat&logo=github&colorB=&label=Stars)](https://github.com/ymrabti/fluttermap_markerpopup/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/ymrabti/fluttermap_markerpopup.svg?style=flat&logo=github&colorB=&label=Issues)](https://github.com/ymrabti/fluttermap_markerpopup/issues)
+[![GitHub license](https://img.shields.io/github/license/ymrabti/fluttermap_markerpopup.svg?style=flat&logo=github&colorB=&label=License)](https://github.com/ymrabti/fluttermap_markerpopup/blob/main/LICENSE)
+[![GitHub last commit](https://img.shields.io/github/last-commit/ymrabti/fluttermap_markerpopup.svg?style=flat&logo=github&colorB=&label=Last%20Commit)](https://github.com/ymrabti/fluttermap_markerpopup/commits/main)
+
+
+<!-- [![Build status](https://github.com/ymrabti/fluttermap_markerpopup/workflows/Publish%20to%20pub.dev/badge.svg?style=flat&logo=github&colorB=&label=Build)](https://github.com/ymrabti/fluttermap_markerpopup) -->
+
 
 Flutter Map Custom Marker Popups is an extension for the popular Flutter Map package. It allows you to create custom markers that, when long-pressed, open customizable popups containing additional data associated with the marker. This package enhances the interactivity and visual appeal of maps in your Flutter applications.
 
@@ -86,10 +96,6 @@ Contributions to this package are welcome! Feel free to open issues or pull requ
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](/LICENSE) file for details.
-## Author
-- **YOUNES MRABTI**
-- GitHub: [ymrabti](https://github.com/ymrabti)
-- E-Mail [mr.younes@youmrabti.com](mailto:mr.younes@youmrabti.com)
 
 ## Acknowledgments
 - Mention any contributors or libraries used in this package.
@@ -97,3 +103,24 @@ This project is licensed under the MIT License - see the [LICENSE.md](/LICENSE) 
 
 
 Please make sure to customize this Markdown text with your specific package details and replace placeholders accordingly.
+
+## 🔗 More Packages
+
+- [Power Geojson](https://pub.dev/packages/power_geojson)
+- [Popup Menu 2](https://pub.dev/packages/popup_menu_2)
+- [Flutter Azimuth](https://pub.dev/packages/flutter_azimuth)
+- [Simple Logger](https://pub.dev/packages/console_tools)
+
+---
+
+## 👨‍💻 Developer Card
+
+<div align="center">
+    <img src="https://avatars.githubusercontent.com/u/47449165?v=4" alt="Younes M'rabti avatar" width="120" height="120" style="border-radius: 50%;" />
+
+### Younes M'rabti
+
+📧 Email: [admin@youmti.net](mailto:admin@youmti.net)  
+🌐 Website: [youmti.net](https://www.youmti.net/)  
+💼 LinkedIn: [younesmrabti1996](https://www.linkedin.com/in/younesmrabti1996/)
+</div>

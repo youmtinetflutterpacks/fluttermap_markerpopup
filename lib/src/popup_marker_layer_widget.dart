@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_map/plugin_api.dart' as flutter_map;
+import 'package:flutter_map/flutter_map.dart' as flutter_map;
 import 'package:longpress_popup/src/popup_layer.dart';
 
 import '../fluttermap_markerpopup.dart';
@@ -21,17 +21,22 @@ class _PopupMarkerLayerWidgetState extends State<PopupMarkerLayerWidget> {
   @override
   void initState() {
     super.initState();
-    _popupController = widget.options.popupController == null
-        ? PopupControllerImpl()
-        : widget.options.popupController as PopupControllerImpl;
+    _popupController = widget.options.popupController == null ? PopupControllerImpl() : widget.options.popupController as PopupControllerImpl;
   }
 
   @override
   Widget build(BuildContext context) {
-    final mapState = flutter_map.FlutterMapState.maybeOf(context)!;
+    final flutter_map.MapCamera mapState = flutter_map.MapCamera.maybeOf(context)!;
     return Stack(
-      children: [
-        MarkerLayer(widget.options, mapState, null, _popupController),
+      children: <Widget>[
+        MarkerLayer(
+          //
+          widget.options,
+          mapState,
+          null,
+          _popupController,
+          mapController: flutter_map.MapController.maybeOf(context)!,
+        ),
         PopupLayer(
           mapState: mapState,
           // stream: mapState.onMoved,

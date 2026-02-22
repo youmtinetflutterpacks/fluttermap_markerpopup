@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_map/plugin_api.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:longpress_popup/src/marker_tap_behavior.dart';
 import 'package:longpress_popup/src/markerdata.dart';
 import 'package:longpress_popup/src/popup_animation.dart';
@@ -32,11 +32,12 @@ class PopupMarkerLayerOptions extends MarkerLayer {
 
   final MarkerLongPressBehavior markerLongPressBehavior;
 
-  final Function(PopupEvent event, List<MarkerData> selectedMarkers)?
-  onPopupEvent;
+  final Function(PopupEvent event, List<MarkerData> selectedMarkers)? onPopupEvent;
 
   final List<MarkerData> markersData;
   PopupMarkerLayerOptions({
+    super.key,
+    //
     required this.popupBuilder,
     AlignmentGeometry? markerRotateAlignment,
     MarkerLongPressBehavior? markerLongPressBehavior,
@@ -50,11 +51,10 @@ class PopupMarkerLayerOptions extends MarkerLayer {
     required this.markersData,
     this.onPopupEvent,
     this.onTap,
-  }) : markerLongPressBehavior =
-           markerLongPressBehavior ??
-           MarkerLongPressBehavior.togglePopupAndHideRest(),
+  }) : markerLongPressBehavior = markerLongPressBehavior ?? MarkerLongPressBehavior.togglePopupAndHideRest(),
        super(
-         markers: markersData.map((e) => e.marker).toList(),
+         //
+         markers: markersData.map((MarkerData e) => e.marker).toList(),
          rotate: markerRotate ?? false,
          rotateAlignment: markerRotateAlignment,
          rotateOrigin: markerRotateOrigin,

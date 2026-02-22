@@ -6,34 +6,21 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 /// Signature for the builder callback used by [AnimatedStack].
-typedef AnimatedStackItemBuilder =
-    Widget Function(
-      BuildContext context,
-      int index,
-      Animation<double> animation,
-    );
+typedef AnimatedStackItemBuilder = Widget Function(BuildContext context, int index, Animation<double> animation);
 
 /// Signature for the builder callback used by [AnimatedStackState.removeItem].
-typedef AnimatedStackRemovedItemBuilder =
-    Widget Function(BuildContext context, Animation<double> animation);
+typedef AnimatedStackRemovedItemBuilder = Widget Function(BuildContext context, Animation<double> animation);
 
 // The default insert/remove animation duration.
 const Duration _kDuration = Duration(milliseconds: 300);
 
 // Incoming and outgoing AnimatedStack items.
 class _ActiveItem implements Comparable<_ActiveItem> {
-  _ActiveItem.incoming(this.controller, this.itemIndex)
-    : removedItemBuilder = null;
+  _ActiveItem.incoming(this.controller, this.itemIndex) : removedItemBuilder = null;
 
-  _ActiveItem.outgoing(
-    this.controller,
-    this.itemIndex,
-    this.removedItemBuilder,
-  );
+  _ActiveItem.outgoing(this.controller, this.itemIndex, this.removedItemBuilder);
 
-  _ActiveItem.index(this.itemIndex)
-    : controller = null,
-      removedItemBuilder = null;
+  _ActiveItem.index(this.itemIndex) : controller = null, removedItemBuilder = null;
 
   final AnimationController? controller;
   final AnimatedStackRemovedItemBuilder? removedItemBuilder;
@@ -46,12 +33,7 @@ class _ActiveItem implements Comparable<_ActiveItem> {
 class AnimatedStack extends StatefulWidget {
   /// Creates a scrolling container that animates items when they are inserted
   /// or removed.
-  const AnimatedStack({
-    Key? key,
-    required this.itemBuilder,
-    this.initialItemCount = 0,
-  }) : assert(initialItemCount >= 0),
-       super(key: key);
+  const AnimatedStack({Key? key, required this.itemBuilder, this.initialItemCount = 0}) : assert(initialItemCount >= 0), super(key: key);
 
   /// The [AnimatedStackItemBuilder] index parameter indicates the item's
   /// position in the stack's children. The value of the index parameter will be
@@ -87,17 +69,12 @@ class AnimatedStack extends StatefulWidget {
   ///  * [maybeOf], a similar function that will return null if no
   ///    [AnimatedStack] ancestor is found.
   static AnimatedStackState of(BuildContext context) {
-    final AnimatedStackState? result = context
-        .findAncestorStateOfType<AnimatedStackState>();
+    final AnimatedStackState? result = context.findAncestorStateOfType<AnimatedStackState>();
     assert(() {
       if (result == null) {
         throw FlutterError.fromParts(<DiagnosticsNode>[
-          ErrorSummary(
-            'AnimatedStack.of() called with a context that does not contain an AnimatedStack.',
-          ),
-          ErrorDescription(
-            'No AnimatedStack ancestor could be found starting from the context that was passed to AnimatedStack.of().',
-          ),
+          ErrorSummary('AnimatedStack.of() called with a context that does not contain an AnimatedStack.'),
+          ErrorDescription('No AnimatedStack ancestor could be found starting from the context that was passed to AnimatedStack.of().'),
           ErrorHint(
             'This can happen when the context provided is from the same StatefulWidget that '
             'built the AnimatedStack.',
@@ -155,8 +132,7 @@ class AnimatedStack extends StatefulWidget {
 ///
 /// [AnimatedStack] item input handlers can also refer to their [AnimatedStackState]
 /// with the static [AnimatedStack.of] method.
-class AnimatedStackState extends State<AnimatedStack>
-    with TickerProviderStateMixin<AnimatedStack> {
+class AnimatedStackState extends State<AnimatedStack> with TickerProviderStateMixin<AnimatedStack> {
   final List<_ActiveItem> _incomingItems = <_ActiveItem>[];
   final List<_ActiveItem> _outgoingItems = <_ActiveItem>[];
   int _itemsCount = 0;
@@ -237,14 +213,8 @@ class AnimatedStackState extends State<AnimatedStack>
       if (item.itemIndex >= itemIndex) item.itemIndex += 1;
     }
 
-    final AnimationController controller = AnimationController(
-      duration: duration,
-      vsync: this,
-    );
-    final _ActiveItem incomingItem = _ActiveItem.incoming(
-      controller,
-      itemIndex,
-    );
+    final AnimationController controller = AnimationController(duration: duration, vsync: this);
+    final _ActiveItem incomingItem = _ActiveItem.incoming(controller, itemIndex);
     setState(() {
       _incomingItems
         ..add(incomingItem)
@@ -253,10 +223,7 @@ class AnimatedStackState extends State<AnimatedStack>
     });
 
     controller.forward().then<void>((_) {
-      _removeActiveItemAt(
-        _incomingItems,
-        incomingItem.itemIndex,
-      )!.controller!.dispose();
+      _removeActiveItemAt(_incomingItems, incomingItem.itemIndex)!.controller!.dispose();
     });
   }
 
@@ -271,29 +238,16 @@ class AnimatedStackState extends State<AnimatedStack>
   /// This method's semantics are the same as Dart's [List.remove] method:
   /// it decreases the length of the list by one and shifts all items at or
   /// before [index] towards the beginning of the list.
-  void removeItem(
-    int index,
-    AnimatedStackRemovedItemBuilder builder, {
-    Duration duration = _kDuration,
-  }) {
+  void removeItem(int index, AnimatedStackRemovedItemBuilder builder, {Duration duration = _kDuration}) {
     assert(index >= 0);
 
     final int itemIndex = _indexToItemIndex(index);
     assert(itemIndex >= 0 && itemIndex < _itemsCount);
     assert(_activeItemAt(_outgoingItems, itemIndex) == null);
 
-    final _ActiveItem? incomingItem = _removeActiveItemAt(
-      _incomingItems,
-      itemIndex,
-    );
-    final AnimationController controller =
-        incomingItem?.controller ??
-        AnimationController(duration: duration, value: 1.0, vsync: this);
-    final _ActiveItem outgoingItem = _ActiveItem.outgoing(
-      controller,
-      itemIndex,
-      builder,
-    );
+    final _ActiveItem? incomingItem = _removeActiveItemAt(_incomingItems, itemIndex);
+    final AnimationController controller = incomingItem?.controller ?? AnimationController(duration: duration, value: 1.0, vsync: this);
+    final _ActiveItem outgoingItem = _ActiveItem.outgoing(controller, itemIndex, builder);
     setState(() {
       _outgoingItems
         ..add(outgoingItem)
@@ -301,10 +255,7 @@ class AnimatedStackState extends State<AnimatedStack>
     });
 
     controller.reverse().then<void>((void value) {
-      _removeActiveItemAt(
-        _outgoingItems,
-        outgoingItem.itemIndex,
-      )!.controller!.dispose();
+      _removeActiveItemAt(_outgoingItems, outgoingItem.itemIndex)!.controller!.dispose();
 
       // Decrement the incoming and outgoing item indices to account
       // for the removal.
@@ -322,25 +273,16 @@ class AnimatedStackState extends State<AnimatedStack>
   Widget _itemBuilder(BuildContext context, int itemIndex) {
     final _ActiveItem? outgoingItem = _activeItemAt(_outgoingItems, itemIndex);
     if (outgoingItem != null) {
-      return outgoingItem.removedItemBuilder!(
-        context,
-        outgoingItem.controller!.view,
-      );
+      return outgoingItem.removedItemBuilder!(context, outgoingItem.controller!.view);
     }
 
     final _ActiveItem? incomingItem = _activeItemAt(_incomingItems, itemIndex);
-    final Animation<double> animation =
-        incomingItem?.controller?.view ?? kAlwaysCompleteAnimation;
+    final Animation<double> animation = incomingItem?.controller?.view ?? kAlwaysCompleteAnimation;
     return widget.itemBuilder(context, _itemIndexToIndex(itemIndex), animation);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: List.generate(
-        _itemsCount,
-        (itemIndex) => _itemBuilder(context, itemIndex),
-      ),
-    );
+    return Stack(children: List<Widget>.generate(_itemsCount, (int itemIndex) => _itemBuilder(context, itemIndex)));
   }
 }

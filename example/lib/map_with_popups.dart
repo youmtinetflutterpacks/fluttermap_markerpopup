@@ -14,14 +14,7 @@ class MapWithPopups extends StatefulWidget {
   final AnchorAlign markerAnchorAlign;
   final bool showMultiplePopups;
 
-  const MapWithPopups({
-    required this.snap,
-    required this.rotate,
-    required this.fade,
-    required this.markerAnchorAlign,
-    required this.showMultiplePopups,
-    Key? key,
-  }) : super(key: key);
+  const MapWithPopups({required this.snap, required this.rotate, required this.fade, required this.markerAnchorAlign, required this.showMultiplePopups, Key? key}) : super(key: key);
 
   @override
   State<MapWithPopups> createState() => _MapWithPopupsState();
@@ -44,7 +37,7 @@ class _MapWithPopupsState extends State<MapWithPopups> {
   void didUpdateWidget(covariant MapWithPopups oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    final selectedMarkers = _popupLayerController.selectedMarkers;
+    final List<MarkerData> selectedMarkers = _popupLayerController.selectedMarkers;
     if (widget.markerAnchorAlign != oldWidget.markerAnchorAlign) {
       setState(() {
         _markers = _buildMarkers();
@@ -55,13 +48,10 @@ class _MapWithPopupsState extends State<MapWithPopups> {
       /// anchor point change). If we can match one of the new Markers to the
       /// old Marker that had the popup then we can show the popup for that
       /// Marker.
-      final matchingMarkers = _markers.where((marker) => selectedMarkers.any(
-          (MarkerData selectedMarker) =>
-              marker.marker.point == selectedMarker.marker.point));
+      final Iterable<MarkerData> matchingMarkers = _markers.where((MarkerData marker) => selectedMarkers.any((MarkerData selectedMarker) => marker.marker.point == selectedMarker.marker.point));
 
       if (matchingMarkers.isNotEmpty) {
-        _popupLayerController.showPopupsOnlyFor(matchingMarkers.toList(),
-            disableAnimation: true);
+        _popupLayerController.showPopupsOnlyFor(matchingMarkers.toList(), disableAnimation: true);
       } else {
         _popupLayerController.hideAllPopups(disableAnimation: true);
       }
@@ -70,33 +60,22 @@ class _MapWithPopupsState extends State<MapWithPopups> {
     /// If we change to show only one popup at a time we should hide all popups
     /// apart from the first one.
     if (!widget.showMultiplePopups && oldWidget.showMultiplePopups) {
-      final matchingMarkers = _markers.where((marker) => selectedMarkers.any(
-          (selectedMarker) =>
-              marker.marker.point == selectedMarker.marker.point));
+      final Iterable<MarkerData> matchingMarkers = _markers.where((MarkerData marker) => selectedMarkers.any((MarkerData selectedMarker) => marker.marker.point == selectedMarker.marker.point));
 
       if (matchingMarkers.length > 1) {
-        _popupLayerController.showPopupsOnlyFor([matchingMarkers.first]);
+        _popupLayerController.showPopupsOnlyFor(<MarkerData>[matchingMarkers.first]);
       }
     }
   }
 
   List<MarkerData> _buildMarkers() {
-    return [
-      Marker(
-        point: LatLng(44.421, 10.404),
-        width: 40,
-        height: 40,
-        builder: (_) => const Icon(
-          AccurateMapIcons.locationOnBottomAligned,
-          size: 40,
-        ),
-        anchorPos: AnchorPos.align(widget.markerAnchorAlign),
-      ),
+    return <Marker>[
+      Marker(point: LatLng(44.421, 10.404), width: 40, height: 40, child: const Icon(AccurateMapIcons.locationOnBottomAligned, size: 40), anchorPos: AnchorPos.align(widget.markerAnchorAlign)),
       Marker(
         point: LatLng(45.683, 10.839),
         width: 20,
         height: 40,
-        builder: (_) => Container(
+        child: Container(
           decoration: BoxDecoration(
             color: Colors.black54,
             border: Border.all(color: Colors.black, width: 0.0),
@@ -111,7 +90,7 @@ class _MapWithPopupsState extends State<MapWithPopups> {
         point: LatLng(45.246, 5.783),
         width: 40,
         height: 20,
-        builder: (_) => Container(
+        child: Container(
           decoration: BoxDecoration(
             color: Colors.blue.withValues(alpha: 0.5),
             border: Border.all(color: Colors.black, width: 0.0),
@@ -122,49 +101,29 @@ class _MapWithPopupsState extends State<MapWithPopups> {
         ),
         anchorPos: AnchorPos.align(widget.markerAnchorAlign),
       ),
-    ].map((e) => DataMarker(e)).toList();
+    ].map((Marker e) => DataMarker(e)).toList();
   }
 
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
-      options: MapOptions(
-        zoom: 5.0,
-        center: LatLng(44.421, 10.404),
-        onTap: (_, __) => _popupLayerController.hideAllPopups(),
-      ),
-      children: [
-        TileLayer(
-          urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-          subdomains: ['a', 'b', 'c'],
-        ),
+      options: MapOptions(initialZoom: 5.0, initialCenter: LatLng(44.421, 10.404), onTap: (_, __) => _popupLayerController.hideAllPopups()),
+      children: <Widget>[
+        TileLayer(urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', subdomains: <String>['a', 'b', 'c']),
         PopupMarkerLayerWidget(
           options: PopupMarkerLayerOptions(
             markerCenterAnimation: const MarkerCenterAnimation(),
             markersData: _markers,
             popupSnap: widget.snap,
             popupController: _popupLayerController,
-            popupBuilder: (BuildContext context, MarkerData marker) =>
-                ExamplePopup(marker),
+            popupBuilder: (BuildContext context, MarkerData marker) => ExamplePopup(marker),
             markerRotate: widget.rotate,
-            markerRotateAlignment: PopupMarkerLayerOptions.rotationAlignmentFor(
-              widget.markerAnchorAlign,
-            ),
-            popupAnimation: widget.fade
-                ? const PopupAnimation.fade(
-                    duration: Duration(milliseconds: 700))
-                : null,
-            markerLongPressBehavior: widget.showMultiplePopups
-                ? MarkerLongPressBehavior.togglePopup()
-                : MarkerLongPressBehavior.togglePopupAndHideRest(),
-            onPopupEvent: (event, selectedMarkers) {
+            markerRotateAlignment: PopupMarkerLayerOptions.rotationAlignmentFor(widget.markerAnchorAlign),
+            popupAnimation: widget.fade ? const PopupAnimation.fade(duration: Duration(milliseconds: 700)) : null,
+            markerLongPressBehavior: widget.showMultiplePopups ? MarkerLongPressBehavior.togglePopup() : MarkerLongPressBehavior.togglePopupAndHideRest(),
+            onPopupEvent: (PopupEvent event, List<MarkerData> selectedMarkers) {
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(event.runtimeType.toString()),
-                  duration: const Duration(seconds: 1),
-                ),
-              );
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(event.runtimeType.toString()), duration: const Duration(seconds: 1)));
             },
           ),
         ),
