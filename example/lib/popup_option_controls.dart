@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:longpress_popup/extension_api.dart';
 
 import 'map_with_popups.dart';
@@ -23,9 +24,10 @@ class _PopupOptionControlsState extends State<PopupOptionControls> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final TextStyle sectionTitleStyle = GoogleFonts.jetBrainsMono(fontSize: 12, fontWeight: FontWeight.w600, letterSpacing: 0.4, color: theme.colorScheme.secondary);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Marker Popup Demo'), centerTitle: true),
+      appBar: AppBar(title: const Text('flutter_map_marker_popup')),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -34,6 +36,7 @@ class _PopupOptionControlsState extends State<PopupOptionControls> {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
                 child: Card(
+                  color: theme.colorScheme.surface,
                   elevation: 0,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                   clipBehavior: Clip.antiAlias,
@@ -43,13 +46,26 @@ class _PopupOptionControlsState extends State<PopupOptionControls> {
             ),
             Container(
               margin: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-              decoration: BoxDecoration(color: theme.colorScheme.surfaceContainerHighest, borderRadius: BorderRadius.circular(20)),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surface,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: theme.colorScheme.outlineVariant.withValues(alpha: 0.4)),
+              ),
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('Display', style: theme.textTheme.titleMedium),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      decoration: BoxDecoration(color: theme.colorScheme.primary.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(999)),
+                      child: Text(
+                        'MODERN EXAMPLE UI',
+                        style: GoogleFonts.jetBrainsMono(fontSize: 11, fontWeight: FontWeight.w600, color: theme.colorScheme.primary),
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+                    Text('Display', style: sectionTitleStyle),
                     const SizedBox(height: 10),
                     Wrap(
                       spacing: 10,
@@ -61,7 +77,7 @@ class _PopupOptionControlsState extends State<PopupOptionControls> {
                       ],
                     ),
                     const SizedBox(height: 18),
-                    Text('Popup snap', style: theme.textTheme.titleMedium),
+                    Text('Popup snap', style: sectionTitleStyle),
                     const SizedBox(height: 10),
                     SegmentedButton<Alignment>(
                       showSelectedIcon: false,
@@ -80,7 +96,7 @@ class _PopupOptionControlsState extends State<PopupOptionControls> {
                       },
                     ),
                     const SizedBox(height: 18),
-                    Text('Marker anchor', style: theme.textTheme.titleMedium),
+                    Text('Marker anchor', style: sectionTitleStyle),
                     const SizedBox(height: 10),
                     SegmentedButton<Alignment>(
                       showSelectedIcon: false,
@@ -102,7 +118,7 @@ class _PopupOptionControlsState extends State<PopupOptionControls> {
                     SwitchListTile.adaptive(
                       contentPadding: EdgeInsets.zero,
                       title: const Text('Show multiple popups'),
-                      subtitle: const Text('Keep previous popups open when selecting another marker.'),
+                      subtitle: Text('Keep previous popups open when selecting another marker.', style: GoogleFonts.jetBrainsMono(fontSize: 11, color: theme.colorScheme.onSurface.withValues(alpha: 0.7))),
                       value: showMultiplePopups,
                       onChanged: (bool newValue) {
                         setState(() {
