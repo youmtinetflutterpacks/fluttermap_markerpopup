@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:longpress_popup/fluttermap_markerpopup.dart';
@@ -19,28 +21,49 @@ class _ExamplePopupState extends State<ExamplePopup> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
-    return Card(
-      color: theme.colorScheme.surface,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: theme.colorScheme.outlineVariant.withValues(alpha: 0.5)),
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: <BoxShadow>[BoxShadow(color: theme.colorScheme.primary.withValues(alpha: 0.16), blurRadius: 24, spreadRadius: 2, offset: const Offset(0, 8))],
       ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(16),
-        onTap: () => setState(() {
-          _currentIcon = (_currentIcon + 1) % _icons.length;
-        }),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsets.only(left: 12, right: 10),
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(color: theme.colorScheme.primary.withValues(alpha: 0.14), borderRadius: BorderRadius.circular(10)),
-              child: Icon(_icons[_currentIcon], color: theme.colorScheme.primary),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(18),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 14, sigmaY: 14),
+          child: InkWell(
+            onTap: () => setState(() {
+              _currentIcon = (_currentIcon + 1) % _icons.length;
+            }),
+            child: Ink(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.42), width: 1.2),
+                gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: <Color>[Colors.white.withValues(alpha: 0.16), theme.colorScheme.surface.withValues(alpha: 0.45)]),
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18),
+                  border: Border.all(color: Colors.white.withValues(alpha: 0.18), width: 0.8),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Container(
+                      margin: const EdgeInsets.only(left: 12, right: 10),
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.primary.withValues(alpha: 0.18),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
+                      ),
+                      child: Icon(_icons[_currentIcon], color: theme.colorScheme.primary),
+                    ),
+                    _cardDescription(context),
+                  ],
+                ),
+              ),
             ),
-            _cardDescription(context),
-          ],
+          ),
         ),
       ),
     );
