@@ -1,6 +1,6 @@
 name: longpress_popup
 description: This Flutter package extends flutter_map to easily show customizable popups when markers are long-pressed. It lets you add images, text, and buttons, and provides methods to programmatically show or hide popups—making map interactions simple and seamless.
-version: 3.0.0
+version: 3.0.1
 repository: https://github.com/ymrabti/fluttermap_markerpopup
 homepage: https://github.com/ymrabti
 

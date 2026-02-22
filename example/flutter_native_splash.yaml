@@ -1,0 +1,22 @@
+# fvm dart run flutter_native_splash:create
+flutter_native_splash:
+    color_dark: "#4F8CFF"
+    color: "#00C2A8"
+    image_dark: assets/branding/logo.jpg
+    image: assets/branding/logo.png
+    #
+
+    android_12:
+        color_dark: "#4F8CFF"
+        color: "#00C2A8"
+        image_dark: assets/branding/logo.jpg
+        image: assets/branding/logo.png
+        
+
+    web: true
+    color_dark_web: "#4F8CFF"
+    color_web: "#00C2A8"
+    image_dark_web: assets/branding/logo.jpg
+    image_web: assets/branding/logo.png
+    # android: false
+    # ios: false

@@ -1,4 +1,9 @@
 # longpress_popup
+<div align="center">
+    <img src="https://raw.githubusercontent.com/ymrabti/fluttermap_markerpopup/assets/logo.png" alt="longpress_popup logo" width="120" height="120" style="border-radius: 50%;" />
+</div>
+
+
 # This is a Fork of [flutter_map_marker_popup](https://github.com/rorystephenson/flutter_map_marker_popup) by [@rorystephenson](https://github.com/rorystephenson).
 
 [![pub package](https://img.shields.io/pub/v/longpress_popup.svg)](https://pub.dev/packages/longpress_popup)
@@ -81,7 +86,7 @@ FlutterMap(
 
 For a complete example which demonstrates all of the various options available try running the demo app in the `example/` directory which results in the following:
 
-![Example](https://raw.githubusercontent.com/ymrabti/fluttermap_markerpopup/main/demo.gif)
+![Example](https://raw.githubusercontent.com/ymrabti/fluttermap_markerpopup/main/screenshot.png)
 
 ## FAQ
 

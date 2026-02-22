@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Semantic Versioning](https://semver.org/).
 
+## [3.0.1] - 2024-06-20
+### Added
+- Updated package version to 3.0.1.
+- Update the visual identity of the package, and enhance the README with a new logo and updated screenshot.
+- apply the new design to the example app and update the screenshot in the README to reflect the new design.
+
 ## [3.0.0] - 2024-06-15
 ### Added
 - Added `AnchorAlign` support and related APIs to control marker anchor/alignment behavior.
