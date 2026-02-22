@@ -2,13 +2,18 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Semantic Versioning](https://semver.org/).
 
-## [3.0.1] - 2024-06-20
+## [3.0.2] - 2026-02-22
+### Added
+- Updated package version to 3.0.2.
+- Updated the README to reflect the new version and any relevant changes.
+
+## [3.0.1] - 2024-02-22
 ### Added
 - Updated package version to 3.0.1.
 - Update the visual identity of the package, and enhance the README with a new logo and updated screenshot.
 - apply the new design to the example app and update the screenshot in the README to reflect the new design.
 
-## [3.0.0] - 2024-06-15
+## [3.0.0] - 2026-02-21
 ### Added
 - Added `AnchorAlign` support and related APIs to control marker anchor/alignment behavior.
 - Added richer popup option handling in the example app (snap/alignment controls and multi-popup behavior toggles).
