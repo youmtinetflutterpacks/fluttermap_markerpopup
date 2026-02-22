@@ -21,15 +21,38 @@ abstract class OvalBounds {
     final num cosThetaSquared = _cosThetaSquared(radians);
     final num sinThetaSquared = _sinThetaSquared(radians);
 
-    return Offset(_boundXImpl(halfWidthSquared, halfHeightSquared, cosThetaSquared, sinThetaSquared), _boundYImpl(halfWidthSquared, halfHeightSquared, cosThetaSquared, sinThetaSquared));
+    return Offset(
+      _boundXImpl(
+        halfWidthSquared,
+        halfHeightSquared,
+        cosThetaSquared,
+        sinThetaSquared,
+      ),
+      _boundYImpl(
+        halfWidthSquared,
+        halfHeightSquared,
+        cosThetaSquared,
+        sinThetaSquared,
+      ),
+    );
   }
 
   static double boundX(double width, double height, double radians) {
-    return _boundXImpl(_halfWidthSquared(width), _halfHeightSquared(height), _cosThetaSquared(radians), _sinThetaSquared(radians));
+    return _boundXImpl(
+      _halfWidthSquared(width),
+      _halfHeightSquared(height),
+      _cosThetaSquared(radians),
+      _sinThetaSquared(radians),
+    );
   }
 
   static double boundY(double width, double height, double radians) {
-    return _boundYImpl(_halfWidthSquared(width), _halfHeightSquared(height), _cosThetaSquared(radians), _sinThetaSquared(radians));
+    return _boundYImpl(
+      _halfWidthSquared(width),
+      _halfHeightSquared(height),
+      _cosThetaSquared(radians),
+      _sinThetaSquared(radians),
+    );
   }
 
   static num _halfWidthSquared(double width) => pow(width / 2, 2);
@@ -40,11 +63,25 @@ abstract class OvalBounds {
 
   static num _sinThetaSquared(double radians) => pow(sin(radians), 2);
 
-  static double _boundXImpl(num halfWidthSquared, num halfHeightSquared, num cosThetaSquared, num sinThetaSquared) {
-    return sqrt(halfWidthSquared * cosThetaSquared + halfHeightSquared * sinThetaSquared);
+  static double _boundXImpl(
+    num halfWidthSquared,
+    num halfHeightSquared,
+    num cosThetaSquared,
+    num sinThetaSquared,
+  ) {
+    return sqrt(
+      halfWidthSquared * cosThetaSquared + halfHeightSquared * sinThetaSquared,
+    );
   }
 
-  static double _boundYImpl(num halfWidthSquared, num halfHeightSquared, num cosThetaSquared, num sinThetaSquared) {
-    return sqrt(halfWidthSquared * sinThetaSquared + halfHeightSquared * cosThetaSquared);
+  static double _boundYImpl(
+    num halfWidthSquared,
+    num halfHeightSquared,
+    num cosThetaSquared,
+    num sinThetaSquared,
+  ) {
+    return sqrt(
+      halfWidthSquared * sinThetaSquared + halfHeightSquared * cosThetaSquared,
+    );
   }
 }

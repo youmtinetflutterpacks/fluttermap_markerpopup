@@ -17,83 +17,196 @@ abstract class PopupContainerTransform {
   static Matrix4 toLeftOfRotatedMarker(MapCamera mapState, MarkerData marker) {
     final Offset markerPoint = _markerPoint(mapState, marker);
 
-    return Matrix4.translationValues(PopupCalculations.mapRightToPointX(mapState, markerPoint), PopupCalculations.mapCenterToPointY(mapState, markerPoint), 0.0)
+    return Matrix4.translationValues(
+        PopupCalculations.mapRightToPointX(mapState, markerPoint),
+        PopupCalculations.mapCenterToPointY(mapState, markerPoint),
+        0.0,
+      )
       ..rotateZ(-mapState.rotationRad)
-      ..translateByVector3(Vector3(PopupCalculations.leftOffsetX(marker), PopupCalculations.centerOffsetY(marker), 0.0));
+      ..translateByVector3(
+        Vector3(
+          PopupCalculations.leftOffsetX(marker),
+          PopupCalculations.centerOffsetY(marker),
+          0.0,
+        ),
+      );
   }
 
   static Matrix4 toLeftOfMarker(MapCamera mapState, MarkerData marker) {
     final Offset markerPoint = _markerPoint(mapState, marker);
 
-    return Matrix4.translationValues(PopupCalculations.mapRightToPointX(mapState, markerPoint) + PopupCalculations.centerOffsetX(marker), PopupCalculations.mapCenterToPointY(mapState, markerPoint) + PopupCalculations.centerOffsetY(marker), 0.0)
+    return Matrix4.translationValues(
+        PopupCalculations.mapRightToPointX(mapState, markerPoint) +
+            PopupCalculations.centerOffsetX(marker),
+        PopupCalculations.mapCenterToPointY(mapState, markerPoint) +
+            PopupCalculations.centerOffsetY(marker),
+        0.0,
+      )
       ..rotateZ(-mapState.rotationRad)
-      ..translateByVector3(Vector3(-PopupCalculations.boundXAtRotation(marker, -mapState.rotationRad), 0.0, 0.0));
+      ..translateByVector3(
+        Vector3(
+          -PopupCalculations.boundXAtRotation(marker, -mapState.rotationRad),
+          0.0,
+          0.0,
+        ),
+      );
   }
 
   static Matrix4 toTopOfRotatedMarker(MapCamera mapState, MarkerData marker) {
     final Offset markerPoint = _markerPoint(mapState, marker);
 
-    return Matrix4.translationValues(PopupCalculations.mapCenterToPointX(mapState, markerPoint), PopupCalculations.mapBottomToPointY(mapState, markerPoint), 0.0)
+    return Matrix4.translationValues(
+        PopupCalculations.mapCenterToPointX(mapState, markerPoint),
+        PopupCalculations.mapBottomToPointY(mapState, markerPoint),
+        0.0,
+      )
       ..rotateZ(-mapState.rotationRad)
-      ..translateByVector3(Vector3(PopupCalculations.centerOffsetX(marker), PopupCalculations.topOffsetY(marker), 0.0));
+      ..translateByVector3(
+        Vector3(
+          PopupCalculations.centerOffsetX(marker),
+          PopupCalculations.topOffsetY(marker),
+          0.0,
+        ),
+      );
   }
 
   static Matrix4 toTopOfMarker(MapCamera mapState, MarkerData marker) {
     final Offset markerPoint = _markerPoint(mapState, marker);
 
-    return Matrix4.translationValues(PopupCalculations.mapCenterToPointX(mapState, markerPoint) + PopupCalculations.centerOffsetX(marker), PopupCalculations.mapBottomToPointY(mapState, markerPoint) + PopupCalculations.centerOffsetY(marker), 0.0)
+    return Matrix4.translationValues(
+        PopupCalculations.mapCenterToPointX(mapState, markerPoint) +
+            PopupCalculations.centerOffsetX(marker),
+        PopupCalculations.mapBottomToPointY(mapState, markerPoint) +
+            PopupCalculations.centerOffsetY(marker),
+        0.0,
+      )
       ..rotateZ(-mapState.rotationRad)
-      ..translateByVector3(Vector3(0.0, -PopupCalculations.boundYAtRotation(marker, -mapState.rotationRad), 0.0));
+      ..translateByVector3(
+        Vector3(
+          0.0,
+          -PopupCalculations.boundYAtRotation(marker, -mapState.rotationRad),
+          0.0,
+        ),
+      );
   }
 
   static Matrix4 toRightOfRotatedMarker(MapCamera mapState, MarkerData marker) {
     final Offset markerPoint = _markerPoint(mapState, marker);
 
-    return Matrix4.translationValues(PopupCalculations.mapLeftToPointX(mapState, markerPoint), PopupCalculations.mapCenterToPointY(mapState, markerPoint), 0.0)
+    return Matrix4.translationValues(
+        PopupCalculations.mapLeftToPointX(mapState, markerPoint),
+        PopupCalculations.mapCenterToPointY(mapState, markerPoint),
+        0.0,
+      )
       ..rotateZ(-mapState.rotationRad)
-      ..translateByVector3(Vector3(PopupCalculations.rightOffsetX(marker), PopupCalculations.centerOffsetY(marker), 0.0));
+      ..translateByVector3(
+        Vector3(
+          PopupCalculations.rightOffsetX(marker),
+          PopupCalculations.centerOffsetY(marker),
+          0.0,
+        ),
+      );
   }
 
   static Matrix4 toRightOfMarker(MapCamera mapState, MarkerData marker) {
     final Offset markerPoint = _markerPoint(mapState, marker);
 
-    return Matrix4.translationValues(PopupCalculations.mapLeftToPointX(mapState, markerPoint) + PopupCalculations.centerOffsetX(marker), PopupCalculations.mapCenterToPointY(mapState, markerPoint) + PopupCalculations.centerOffsetY(marker), 0.0)
+    return Matrix4.translationValues(
+        PopupCalculations.mapLeftToPointX(mapState, markerPoint) +
+            PopupCalculations.centerOffsetX(marker),
+        PopupCalculations.mapCenterToPointY(mapState, markerPoint) +
+            PopupCalculations.centerOffsetY(marker),
+        0.0,
+      )
       ..rotateZ(-mapState.rotationRad)
-      ..translateByVector3(Vector3(PopupCalculations.boundXAtRotation(marker, -mapState.rotationRad), 0.0, 0.0));
+      ..translateByVector3(
+        Vector3(
+          PopupCalculations.boundXAtRotation(marker, -mapState.rotationRad),
+          0.0,
+          0.0,
+        ),
+      );
   }
 
-  static Matrix4 toBottomOfRotatedMarker(MapCamera mapState, MarkerData marker) {
+  static Matrix4 toBottomOfRotatedMarker(
+    MapCamera mapState,
+    MarkerData marker,
+  ) {
     final Offset markerPoint = _markerPoint(mapState, marker);
 
-    return Matrix4.translationValues(PopupCalculations.mapCenterToPointX(mapState, markerPoint), PopupCalculations.mapTopToPointY(mapState, markerPoint), 0.0)
+    return Matrix4.translationValues(
+        PopupCalculations.mapCenterToPointX(mapState, markerPoint),
+        PopupCalculations.mapTopToPointY(mapState, markerPoint),
+        0.0,
+      )
       ..rotateZ(-mapState.rotationRad)
-      ..translateByVector3(Vector3(PopupCalculations.centerOffsetX(marker), PopupCalculations.bottomOffsetY(marker), 0.0));
+      ..translateByVector3(
+        Vector3(
+          PopupCalculations.centerOffsetX(marker),
+          PopupCalculations.bottomOffsetY(marker),
+          0.0,
+        ),
+      );
   }
 
   static Matrix4 toBottomOfMarker(MapCamera mapState, MarkerData marker) {
     final Offset markerPoint = _markerPoint(mapState, marker);
 
-    return Matrix4.translationValues(PopupCalculations.mapCenterToPointX(mapState, markerPoint) + PopupCalculations.centerOffsetX(marker), PopupCalculations.mapTopToPointY(mapState, markerPoint) + PopupCalculations.centerOffsetY(marker), 0.0)
+    return Matrix4.translationValues(
+        PopupCalculations.mapCenterToPointX(mapState, markerPoint) +
+            PopupCalculations.centerOffsetX(marker),
+        PopupCalculations.mapTopToPointY(mapState, markerPoint) +
+            PopupCalculations.centerOffsetY(marker),
+        0.0,
+      )
       ..rotateZ(-mapState.rotationRad)
-      ..translateByVector3(Vector3(0.0, PopupCalculations.boundYAtRotation(marker, -mapState.rotationRad), 0.0));
+      ..translateByVector3(
+        Vector3(
+          0.0,
+          PopupCalculations.boundYAtRotation(marker, -mapState.rotationRad),
+          0.0,
+        ),
+      );
   }
 
-  static Matrix4 toCenterOfRotatedMarker(MapCamera mapState, MarkerData marker) {
+  static Matrix4 toCenterOfRotatedMarker(
+    MapCamera mapState,
+    MarkerData marker,
+  ) {
     final Offset markerPoint = _markerPoint(mapState, marker);
 
-    return Matrix4.translationValues(PopupCalculations.mapCenterToPointX(mapState, markerPoint), PopupCalculations.mapCenterToPointY(mapState, markerPoint), 0.0)
+    return Matrix4.translationValues(
+        PopupCalculations.mapCenterToPointX(mapState, markerPoint),
+        PopupCalculations.mapCenterToPointY(mapState, markerPoint),
+        0.0,
+      )
       ..rotateZ(-mapState.rotationRad)
-      ..translateByVector3(Vector3(PopupCalculations.centerOffsetX(marker), PopupCalculations.centerOffsetY(marker), 0.0));
+      ..translateByVector3(
+        Vector3(
+          PopupCalculations.centerOffsetX(marker),
+          PopupCalculations.centerOffsetY(marker),
+          0.0,
+        ),
+      );
   }
 
   static Matrix4 toCenterOfMarker(MapCamera mapState, MarkerData marker) {
     final Offset markerPoint = _markerPoint(mapState, marker);
 
-    return Matrix4.translationValues(PopupCalculations.mapCenterToPointX(mapState, markerPoint) + PopupCalculations.centerOffsetX(marker), PopupCalculations.mapCenterToPointY(mapState, markerPoint) + PopupCalculations.centerOffsetY(marker), 0.0)..rotateZ(-mapState.rotationRad);
+    return Matrix4.translationValues(
+      PopupCalculations.mapCenterToPointX(mapState, markerPoint) +
+          PopupCalculations.centerOffsetX(marker),
+      PopupCalculations.mapCenterToPointY(mapState, markerPoint) +
+          PopupCalculations.centerOffsetY(marker),
+      0.0,
+    )..rotateZ(-mapState.rotationRad);
   }
 
   static Offset _markerPoint(MapCamera mapState, MarkerData marker) {
     final Offset pt = mapState.projectAtZoom(marker.marker.point);
-    return Offset(pt.dx - mapState.pixelOrigin.dx, pt.dy - mapState.pixelOrigin.dy);
+    return Offset(
+      pt.dx - mapState.pixelOrigin.dx,
+      pt.dy - mapState.pixelOrigin.dy,
+    );
   }
 }

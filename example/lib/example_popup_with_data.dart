@@ -10,7 +10,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(title: 'Marker with additional data example', home: MapPage());
+    return const MaterialApp(
+      title: 'Marker with additional data example',
+      home: MapPage(),
+    );
   }
 }
 
@@ -38,21 +41,42 @@ class _MapPageState extends State<MapPage> {
           initialCenter: LatLng(48.857661, 2.295135),
           initialZoom: 13.0,
           interactionOptions: const InteractionOptions(
-            flags: InteractiveFlag.all & ~InteractiveFlag.rotate, // Disable rotation to better show marker rotation
+            flags:
+                InteractiveFlag.all &
+                ~InteractiveFlag
+                    .rotate, // Disable rotation to better show marker rotation
           ),
           onTap: (_, __) => _popupLayerController.hideAllPopups(),
         ),
         children: <Widget>[
-          TileLayer(urlTemplate: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png', subdomains: <String>['a', 'b', 'c']),
+          TileLayer(
+            urlTemplate:
+                'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png',
+            subdomains: <String>['a', 'b', 'c'],
+          ),
           PopupMarkerLayerWidget(
             options: PopupMarkerLayerOptions(
               markersData: <MarkerData>[
                 DataMarker(
                   MonumentMarker(
-                    monument: Monument(name: 'Eiffel Tower', imagePath: 'https://cdn.lifestyleasia.com/wp-content/uploads/2019/10/21224220/Winer-Parisienne.jpg', lat: 48.857661, long: 2.295135),
+                    monument: Monument(
+                      name: 'Eiffel Tower',
+                      imagePath:
+                          'https://cdn.lifestyleasia.com/wp-content/uploads/2019/10/21224220/Winer-Parisienne.jpg',
+                      lat: 48.857661,
+                      long: 2.295135,
+                    ),
                   ),
                 ),
-                DataMarker(Marker(alignment: Alignment.center, point: LatLng(48.859661, 2.305135), height: Monument.size, width: Monument.size, child: const Icon(Icons.shop))),
+                DataMarker(
+                  Marker(
+                    alignment: Alignment.center,
+                    point: LatLng(48.859661, 2.305135),
+                    height: Monument.size,
+                    width: Monument.size,
+                    child: const Icon(Icons.shop),
+                  ),
+                ),
               ],
               popupController: _popupLayerController,
               popupBuilder: (_, MarkerData marker) {
@@ -73,7 +97,12 @@ class _MapPageState extends State<MapPage> {
 class Monument {
   static const double size = 25;
 
-  Monument({required this.name, required this.imagePath, required this.lat, required this.long});
+  Monument({
+    required this.name,
+    required this.imagePath,
+    required this.lat,
+    required this.long,
+  });
 
   final String name;
   final String imagePath;
@@ -82,13 +111,21 @@ class Monument {
 }
 
 class MonumentMarker extends Marker {
-  MonumentMarker({required this.monument}) : super(alignment: Alignment.center, height: Monument.size, width: Monument.size, point: LatLng(monument.lat, monument.long), child: const Icon(Icons.camera_alt));
+  MonumentMarker({required this.monument})
+    : super(
+        alignment: Alignment.center,
+        height: Monument.size,
+        width: Monument.size,
+        point: LatLng(monument.lat, monument.long),
+        child: const Icon(Icons.camera_alt),
+      );
 
   final Monument monument;
 }
 
 class MonumentMarkerPopup extends StatelessWidget {
-  const MonumentMarkerPopup({Key? key, required this.monument}) : super(key: key);
+  const MonumentMarkerPopup({Key? key, required this.monument})
+    : super(key: key);
   final Monument monument;
 
   @override
@@ -97,7 +134,14 @@ class MonumentMarkerPopup extends StatelessWidget {
       width: 200,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[Image.network(monument.imagePath, width: 200), Text(monument.name), Text('${monument.lat}-${monument.long}')]),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Image.network(monument.imagePath, width: 200),
+            Text(monument.name),
+            Text('${monument.lat}-${monument.long}'),
+          ],
+        ),
       ),
     );
   }

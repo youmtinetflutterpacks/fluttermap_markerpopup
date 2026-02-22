@@ -18,9 +18,18 @@ class PopupLayout {
   final Alignment rotationAlignment;
   final Matrix4 transformationMatrix;
 
-  PopupLayout({required this.rotationAlignment, required this.contentAlignment, required this.transformationMatrix});
+  PopupLayout({
+    required this.rotationAlignment,
+    required this.contentAlignment,
+    required this.transformationMatrix,
+  });
 
-  static PopupLayout calculate({required MapCamera mapState, required MarkerData marker, required PopupSnap snap, required bool markerRotate}) {
+  static PopupLayout calculate({
+    required MapCamera mapState,
+    required MarkerData marker,
+    required PopupSnap snap,
+    required bool markerRotate,
+  }) {
     switch (snap) {
       case PopupSnap.markerLeft:
         return SnapToMarkerLayout.left(mapState, marker, markerRotate);

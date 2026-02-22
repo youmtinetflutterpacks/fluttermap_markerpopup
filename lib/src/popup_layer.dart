@@ -16,9 +16,21 @@ class PopupLayer extends StatefulWidget {
   final PopupControllerImpl popupController;
   final PopupAnimation? popupAnimation;
   final bool markerRotate;
-  final Function(PopupEvent event, List<MarkerData> selectedMarkers)? onPopupEvent;
+  final Function(PopupEvent event, List<MarkerData> selectedMarkers)?
+  onPopupEvent;
 
-  const PopupLayer({required this.mapState, this.stream, required this.popupBuilder, required this.popupSnap, required PopupController popupController, this.popupAnimation, required this.markerRotate, this.onPopupEvent, Key? key}) : popupController = popupController as PopupControllerImpl, super(key: key);
+  const PopupLayer({
+    required this.mapState,
+    this.stream,
+    required this.popupBuilder,
+    required this.popupSnap,
+    required PopupController popupController,
+    this.popupAnimation,
+    required this.markerRotate,
+    this.onPopupEvent,
+    Key? key,
+  }) : popupController = popupController as PopupControllerImpl,
+       super(key: key);
 
   @override
   State<PopupLayer> createState() => _PopupLayerState();
@@ -29,13 +41,15 @@ class _PopupLayerState extends State<PopupLayer> {
   void initState() {
     super.initState();
 
-    widget.popupController.streamController = StreamController<PopupEvent>.broadcast();
+    widget.popupController.streamController =
+        StreamController<PopupEvent>.broadcast();
   }
 
   @override
   void didUpdateWidget(covariant PopupLayer oldWidget) {
     if (oldWidget.popupController != widget.popupController) {
-      widget.popupController.streamController = StreamController<PopupEvent>.broadcast();
+      widget.popupController.streamController =
+          StreamController<PopupEvent>.broadcast();
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -55,9 +69,24 @@ class _PopupLayerState extends State<PopupLayer> {
         final PopupAnimation? popupAnimation = widget.popupAnimation;
 
         if (popupAnimation == null) {
-          return SimplePopupContainer(mapState: widget.mapState, popupController: widget.popupController, snap: widget.popupSnap, popupBuilder: widget.popupBuilder, markerRotate: widget.markerRotate, onPopupEvent: widget.onPopupEvent);
+          return SimplePopupContainer(
+            mapState: widget.mapState,
+            popupController: widget.popupController,
+            snap: widget.popupSnap,
+            popupBuilder: widget.popupBuilder,
+            markerRotate: widget.markerRotate,
+            onPopupEvent: widget.onPopupEvent,
+          );
         } else {
-          return AnimatedPopupContainer(mapState: widget.mapState, popupController: widget.popupController, snap: widget.popupSnap, popupBuilder: widget.popupBuilder, popupAnimation: popupAnimation, markerRotate: widget.markerRotate, onPopupEvent: widget.onPopupEvent);
+          return AnimatedPopupContainer(
+            mapState: widget.mapState,
+            popupController: widget.popupController,
+            snap: widget.popupSnap,
+            popupBuilder: widget.popupBuilder,
+            popupAnimation: popupAnimation,
+            markerRotate: widget.markerRotate,
+            onPopupEvent: widget.onPopupEvent,
+          );
         }
       },
     );

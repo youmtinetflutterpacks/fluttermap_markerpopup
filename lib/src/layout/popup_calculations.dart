@@ -38,13 +38,21 @@ abstract class PopupCalculations {
   /// The distance from the [marker] center to the horizontal bounds at a given
   /// rotation.
   static double boundXAtRotation(MarkerData marker, double radians) {
-    return OvalBounds.boundX(marker.marker.width, marker.marker.height, radians);
+    return OvalBounds.boundX(
+      marker.marker.width,
+      marker.marker.height,
+      radians,
+    );
   }
 
   /// The distance from the [marker] center to the vertical bounds at a given
   /// rotation.
   static double boundYAtRotation(MarkerData marker, double radians) {
-    return OvalBounds.boundY(marker.marker.width, marker.marker.height, radians);
+    return OvalBounds.boundY(
+      marker.marker.width,
+      marker.marker.height,
+      radians,
+    );
   }
 
   static double mapLeftToPointX(MapCamera mapState, Offset point) {

@@ -21,12 +21,16 @@ class _PopupMarkerLayerWidgetState extends State<PopupMarkerLayerWidget> {
   @override
   void initState() {
     super.initState();
-    _popupController = widget.options.popupController == null ? PopupControllerImpl() : widget.options.popupController as PopupControllerImpl;
+    _popupController = widget.options.popupController == null
+        ? PopupControllerImpl()
+        : widget.options.popupController as PopupControllerImpl;
   }
 
   @override
   Widget build(BuildContext context) {
-    final flutter_map.MapCamera mapState = flutter_map.MapCamera.maybeOf(context)!;
+    final flutter_map.MapCamera mapState = flutter_map.MapCamera.maybeOf(
+      context,
+    )!;
     return Stack(
       children: <Widget>[
         MarkerLayer(

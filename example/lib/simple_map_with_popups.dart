@@ -8,7 +8,11 @@ import 'package:latlong2/latlong.dart';
 import 'example_popup.dart';
 
 class SimpleMapWithPopups extends StatelessWidget {
-  final List<LatLng> _markerPositions = <LatLng>[LatLng(44.421, 10.404), LatLng(45.683, 10.839), LatLng(45.246, 5.783)];
+  final List<LatLng> _markerPositions = <LatLng>[
+    LatLng(44.421, 10.404),
+    LatLng(45.683, 10.839),
+    LatLng(45.246, 5.783),
+  ];
 
   /// Used to trigger showing/hiding of popups.
   final PopupController _popupLayerController = PopupController();
@@ -21,17 +25,24 @@ class SimpleMapWithPopups extends StatelessWidget {
       options: MapOptions(
         initialZoom: 5.0,
         initialCenter: LatLng(44.421, 10.404),
-        onTap: (_, __) => _popupLayerController.hideAllPopups(), // Hide popup when the map is tapped.
+        onTap: (_, __) => _popupLayerController
+            .hideAllPopups(), // Hide popup when the map is tapped.
       ),
       children: <Widget>[
-        TileLayer(urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', subdomains: <String>['a', 'b', 'c']),
+        TileLayer(
+          urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          subdomains: <String>['a', 'b', 'c'],
+        ),
         PopupMarkerLayerWidget(
           options: PopupMarkerLayerOptions(
             //
             popupController: _popupLayerController,
             markersData: _markers,
-            markerRotateAlignment: PopupMarkerLayerOptions.rotationAlignmentFor(AnchorAlign.top),
-            popupBuilder: (BuildContext context, MarkerData marker) => ExamplePopup(marker),
+            markerRotateAlignment: PopupMarkerLayerOptions.rotationAlignmentFor(
+              AnchorAlign.top,
+            ),
+            popupBuilder: (BuildContext context, MarkerData marker) =>
+                ExamplePopup(marker),
           ),
         ),
       ],

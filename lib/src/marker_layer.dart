@@ -29,7 +29,8 @@ class MarkerLayer extends StatefulWidget {
   State<MarkerLayer> createState() => _MarkerLayerState();
 }
 
-class _MarkerLayerState extends State<MarkerLayer> with SingleTickerProviderStateMixin {
+class _MarkerLayerState extends State<MarkerLayer>
+    with SingleTickerProviderStateMixin {
   double lastZoom = -1.0;
 
   /// List containing cached pixel positions of markers
@@ -42,13 +43,22 @@ class _MarkerLayerState extends State<MarkerLayer> with SingleTickerProviderStat
   void Function()? _animationListener;
 
   // Calling this every time markerOpts change should guarantee proper length
-  List<Offset> generatePxCache() => List<Offset>.generate(widget.layerOptions.markers.length, (int i) => widget.map.projectAtZoom(widget.layerOptions.markers[i].point, widget.map.zoom));
+  List<Offset> generatePxCache() => List<Offset>.generate(
+    widget.layerOptions.markers.length,
+    (int i) => widget.map.projectAtZoom(
+      widget.layerOptions.markers[i].point,
+      widget.map.zoom,
+    ),
+  );
 
   @override
   void initState() {
     super.initState();
     _pxCache = generatePxCache();
-    _centerMarkerController = AnimationController(vsync: this, duration: widget.layerOptions.markerCenterAnimation?.duration);
+    _centerMarkerController = AnimationController(
+      vsync: this,
+      duration: widget.layerOptions.markerCenterAnimation?.duration,
+    );
   }
 
   @override
@@ -56,7 +66,8 @@ class _MarkerLayerState extends State<MarkerLayer> with SingleTickerProviderStat
     super.didUpdateWidget(oldWidget);
     lastZoom = -1.0;
     _pxCache = generatePxCache();
-    _centerMarkerController.duration = widget.layerOptions.markerCenterAnimation?.duration;
+    _centerMarkerController.duration =
+        widget.layerOptions.markerCenterAnimation?.duration;
   }
 
   @override
@@ -71,12 +82,20 @@ class _MarkerLayerState extends State<MarkerLayer> with SingleTickerProviderStat
         for (int i = 0; i < pins.length; i++) {
           MarkerData pin = pins[i];
 
-          final double left = 0.5 * pin.marker.width * ((pin.marker.alignment ?? Alignment.center).x + 1);
-          final double top = 0.5 * pin.marker.height * ((pin.marker.alignment ?? Alignment.center).y + 1);
+          final double left =
+              0.5 *
+              pin.marker.width *
+              ((pin.marker.alignment ?? Alignment.center).x + 1);
+          final double top =
+              0.5 *
+              pin.marker.height *
+              ((pin.marker.alignment ?? Alignment.center).y + 1);
           final double right = pin.marker.width - left;
           final double bottom = pin.marker.height - top;
           // Decide whether to use cached point or calculate it
-          Offset pxPoint = sameZoom ? _pxCache[i] : widget.map.projectAtZoom(pin.marker.point, widget.map.zoom);
+          Offset pxPoint = sameZoom
+              ? _pxCache[i]
+              : widget.map.projectAtZoom(pin.marker.point, widget.map.zoom);
           if (!sameZoom) {
             _pxCache[i] = pxPoint;
           }
@@ -90,20 +109,31 @@ class _MarkerLayerState extends State<MarkerLayer> with SingleTickerProviderStat
                 sw,
                 ne,
               ); */
-          if (!widget.map.pixelBounds.overlaps(Rect.fromPoints(Offset(pxPoint.dx + left, pxPoint.dy - bottom), Offset(pxPoint.dx - right, pxPoint.dy + top)))) {
+          if (!widget.map.pixelBounds.overlaps(
+            Rect.fromPoints(
+              Offset(pxPoint.dx + left, pxPoint.dy - bottom),
+              Offset(pxPoint.dx - right, pxPoint.dy + top),
+            ),
+          )) {
             continue;
           }
 
-          final Offset pos = pxPoint - widget.map.getNewPixelOrigin(widget.map.center, widget.map.zoom);
+          final Offset pos =
+              pxPoint -
+              widget.map.getNewPixelOrigin(widget.map.center, widget.map.zoom);
 
           final InkWell interactiveMarker = InkWell(
             onLongPress: () {
-              List<MarkerData> seleers2 = widget.popupController.selectedMarkers;
+              List<MarkerData> seleers2 =
+                  widget.popupController.selectedMarkers;
               if (!seleers2.contains(pin)) {
                 _centerMarker(pin.marker);
               }
 
-              widget.layerOptions.markerLongPressBehavior.apply(pin, widget.popupController);
+              widget.layerOptions.markerLongPressBehavior.apply(
+                pin,
+                widget.popupController,
+              );
             },
             onTap: () {
               Function(MarkerData)? onTap2 = widget.layerOptions.onTap;
@@ -118,7 +148,10 @@ class _MarkerLayerState extends State<MarkerLayer> with SingleTickerProviderStat
 
           Widget markerWidget;
           if (pin.marker.rotate ?? markerRotate) {
-            final Offset markerRotateOrigin = Offset(pin.marker.width / 2, pin.marker.height / 2);
+            final Offset markerRotateOrigin = Offset(
+              pin.marker.width / 2,
+              pin.marker.height / 2,
+            );
 
             // Counter rotated marker to the map rotation
             markerWidget = Transform.rotate(
@@ -153,13 +186,17 @@ class _MarkerLayerState extends State<MarkerLayer> with SingleTickerProviderStat
   }
 
   void _centerMarker(Marker marker) {
-    final MarkerCenterAnimation? markerLayerAnimation = widget.layerOptions.markerCenterAnimation;
+    final MarkerCenterAnimation? markerLayerAnimation =
+        widget.layerOptions.markerCenterAnimation;
     if (markerLayerAnimation == null) return;
 
     final LatLng center = widget.map.center;
     final LatLngTween tween = LatLngTween(begin: center, end: marker.point);
 
-    Animation<double> animation = CurvedAnimation(parent: _centerMarkerController, curve: markerLayerAnimation.curve);
+    Animation<double> animation = CurvedAnimation(
+      parent: _centerMarkerController,
+      curve: markerLayerAnimation.curve,
+    );
 
     void listener() {
       widget.mapController.move(tween.evaluate(animation), widget.map.zoom);

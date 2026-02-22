@@ -14,7 +14,11 @@ class ExamplePopup extends StatefulWidget {
 }
 
 class _ExamplePopupState extends State<ExamplePopup> {
-  final List<IconData> _icons = <IconData>[Icons.star_border, Icons.star_half, Icons.star];
+  final List<IconData> _icons = <IconData>[
+    Icons.star_border,
+    Icons.star_half,
+    Icons.star,
+  ];
   int _currentIcon = 0;
 
   @override
@@ -24,7 +28,14 @@ class _ExamplePopupState extends State<ExamplePopup> {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
-        boxShadow: <BoxShadow>[BoxShadow(color: theme.colorScheme.primary.withValues(alpha: 0.16), blurRadius: 24, spreadRadius: 2, offset: const Offset(0, 8))],
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: theme.colorScheme.primary.withValues(alpha: 0.16),
+            blurRadius: 24,
+            spreadRadius: 2,
+            offset: const Offset(0, 8),
+          ),
+        ],
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(18),
@@ -37,13 +48,26 @@ class _ExamplePopupState extends State<ExamplePopup> {
             child: Ink(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
-                border: Border.all(color: Colors.white.withValues(alpha: 0.42), width: 1.2),
-                gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: <Color>[Colors.white.withValues(alpha: 0.16), theme.colorScheme.surface.withValues(alpha: 0.45)]),
+                border: Border.all(
+                  color: Colors.white.withValues(alpha: 0.42),
+                  width: 1.2,
+                ),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[
+                    Colors.white.withValues(alpha: 0.16),
+                    theme.colorScheme.surface.withValues(alpha: 0.45),
+                  ],
+                ),
               ),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
-                  border: Border.all(color: Colors.white.withValues(alpha: 0.18), width: 0.8),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.18),
+                    width: 0.8,
+                  ),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -52,11 +76,18 @@ class _ExamplePopupState extends State<ExamplePopup> {
                       margin: const EdgeInsets.only(left: 12, right: 10),
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: theme.colorScheme.primary.withValues(alpha: 0.18),
+                        color: theme.colorScheme.primary.withValues(
+                          alpha: 0.18,
+                        ),
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
+                        border: Border.all(
+                          color: Colors.white.withValues(alpha: 0.2),
+                        ),
                       ),
-                      child: Icon(_icons[_currentIcon], color: theme.colorScheme.primary),
+                      child: Icon(
+                        _icons[_currentIcon],
+                        color: theme.colorScheme.primary,
+                      ),
                     ),
                     _cardDescription(context),
                   ],
@@ -83,11 +114,30 @@ class _ExamplePopupState extends State<ExamplePopup> {
               'Popup marker',
               overflow: TextOverflow.fade,
               softWrap: false,
-              style: GoogleFonts.inter(fontWeight: FontWeight.w600, fontSize: 14),
+              style: GoogleFonts.inter(
+                fontWeight: FontWeight.w600,
+                fontSize: 14,
+              ),
             ),
             const SizedBox(height: 6),
-            Text('Position: ${widget.marker.marker.point.latitude.toStringAsFixed(3)}, ${widget.marker.marker.point.longitude.toStringAsFixed(3)}', style: GoogleFonts.jetBrainsMono(fontSize: 11.5, color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8))),
-            Text('Size: ${widget.marker.marker.width.toInt()} × ${widget.marker.marker.height.toInt()}', style: GoogleFonts.jetBrainsMono(fontSize: 11.5, color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8))),
+            Text(
+              'Position: ${widget.marker.marker.point.latitude.toStringAsFixed(3)}, ${widget.marker.marker.point.longitude.toStringAsFixed(3)}',
+              style: GoogleFonts.jetBrainsMono(
+                fontSize: 11.5,
+                color: Theme.of(
+                  context,
+                ).colorScheme.onSurface.withValues(alpha: 0.8),
+              ),
+            ),
+            Text(
+              'Size: ${widget.marker.marker.width.toInt()} × ${widget.marker.marker.height.toInt()}',
+              style: GoogleFonts.jetBrainsMono(
+                fontSize: 11.5,
+                color: Theme.of(
+                  context,
+                ).colorScheme.onSurface.withValues(alpha: 0.8),
+              ),
+            ),
           ],
         ),
       ),
