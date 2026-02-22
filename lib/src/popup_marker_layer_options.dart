@@ -33,7 +33,7 @@ class PopupMarkerLayerOptions extends MarkerLayer {
   final MarkerLongPressBehavior markerLongPressBehavior;
 
   final Function(PopupEvent event, List<MarkerData> selectedMarkers)?
-      onPopupEvent;
+  onPopupEvent;
 
   final List<MarkerData> markersData;
   PopupMarkerLayerOptions({
@@ -50,14 +50,15 @@ class PopupMarkerLayerOptions extends MarkerLayer {
     required this.markersData,
     this.onPopupEvent,
     this.onTap,
-  })  : markerLongPressBehavior = markerLongPressBehavior ??
-            MarkerLongPressBehavior.togglePopupAndHideRest(),
-        super(
-          markers: markersData.map((e) => e.marker).toList(),
-          rotate: markerRotate ?? false,
-          rotateAlignment: markerRotateAlignment,
-          rotateOrigin: markerRotateOrigin,
-        );
+  }) : markerLongPressBehavior =
+           markerLongPressBehavior ??
+           MarkerLongPressBehavior.togglePopupAndHideRest(),
+       super(
+         markers: markersData.map((e) => e.marker).toList(),
+         rotate: markerRotate ?? false,
+         rotateAlignment: markerRotateAlignment,
+         rotateOrigin: markerRotateOrigin,
+       );
 
   static AlignmentGeometry rotationAlignmentFor(AnchorAlign anchorAlign) {
     switch (anchorAlign) {

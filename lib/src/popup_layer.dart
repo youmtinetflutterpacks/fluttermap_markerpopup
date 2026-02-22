@@ -18,7 +18,7 @@ class PopupLayer extends StatefulWidget {
   final PopupAnimation? popupAnimation;
   final bool markerRotate;
   final Function(PopupEvent event, List<MarkerData> selectedMarkers)?
-      onPopupEvent;
+  onPopupEvent;
 
   const PopupLayer({
     required this.mapState,
@@ -30,8 +30,8 @@ class PopupLayer extends StatefulWidget {
     required this.markerRotate,
     this.onPopupEvent,
     Key? key,
-  })  : popupController = popupController as PopupControllerImpl,
-        super(key: key);
+  }) : popupController = popupController as PopupControllerImpl,
+       super(key: key);
 
   @override
   State<PopupLayer> createState() => _PopupLayerState();

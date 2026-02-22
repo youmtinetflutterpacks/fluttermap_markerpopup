@@ -8,49 +8,45 @@ abstract class PopupEvent {
   factory PopupEvent.showAlsoFor(
     List<MarkerData> markers, {
     required bool disableAnimation,
-  }) =>
-      ShowPopupsAlsoFor._(
-        markers,
-        disableAnimation: disableAnimation,
-      );
+  }) => ShowPopupsAlsoFor._(markers, disableAnimation: disableAnimation);
 
   factory PopupEvent.showOnlyFor(
     List<MarkerData> markers, {
     required bool disableAnimation,
-  }) =>
-      ShowPopupsOnlyFor._(
-        markers,
-        disableAnimation: disableAnimation,
-      );
+  }) => ShowPopupsOnlyFor._(markers, disableAnimation: disableAnimation);
 
   factory PopupEvent.hideAll({required bool disableAnimation}) =>
-      HideAllPopupsEvent._(
-        disableAnimation: disableAnimation,
-      );
+      HideAllPopupsEvent._(disableAnimation: disableAnimation);
 
   factory PopupEvent.hideOnlyFor(
     List<MarkerData> markers, {
     required bool disableAnimation,
-  }) =>
-      HidePopupsOnlyFor._(markers, disableAnimation: disableAnimation);
+  }) => HidePopupsOnlyFor._(markers, disableAnimation: disableAnimation);
 
-  factory PopupEvent.toggle(MarkerData marker,
-          {required bool disableAnimation}) =>
-      TogglePopupEvent._(marker, disableAnimation: disableAnimation);
+  factory PopupEvent.toggle(
+    MarkerData marker, {
+    required bool disableAnimation,
+  }) => TogglePopupEvent._(marker, disableAnimation: disableAnimation);
 
   void handle({
-    required void Function(List<MarkerData> markers,
-            {required bool disableAnimation})
-        showAlsoFor,
-    required void Function(List<MarkerData> markers,
-            {required bool disableAnimation})
-        showOnlyFor,
+    required void Function(
+      List<MarkerData> markers, {
+      required bool disableAnimation,
+    })
+    showAlsoFor,
+    required void Function(
+      List<MarkerData> markers, {
+      required bool disableAnimation,
+    })
+    showOnlyFor,
     required void Function({required bool disableAnimation}) hideAll,
-    required void Function(List<MarkerData> markers,
-            {required bool disableAnimation})
-        hideOnlyFor,
+    required void Function(
+      List<MarkerData> markers, {
+      required bool disableAnimation,
+    })
+    hideOnlyFor,
     required void Function(MarkerData marker, {required bool disableAnimation})
-        toggle,
+    toggle,
   }) {
     final thisEvent = this;
     if (thisEvent is ShowPopupsAlsoFor) {
@@ -85,20 +81,16 @@ class ShowPopupsAlsoFor extends PopupEvent {
   final List<MarkerData> markers;
   final bool disableAnimation;
 
-  const ShowPopupsAlsoFor._(
-    this.markers, {
-    required this.disableAnimation,
-  }) : super._();
+  const ShowPopupsAlsoFor._(this.markers, {required this.disableAnimation})
+    : super._();
 }
 
 class ShowPopupsOnlyFor extends PopupEvent {
   final List<MarkerData> markers;
   final bool disableAnimation;
 
-  const ShowPopupsOnlyFor._(
-    this.markers, {
-    required this.disableAnimation,
-  }) : super._();
+  const ShowPopupsOnlyFor._(this.markers, {required this.disableAnimation})
+    : super._();
 }
 
 class HideAllPopupsEvent extends PopupEvent {
@@ -111,10 +103,8 @@ class HidePopupsOnlyFor extends PopupEvent {
   final List<MarkerData> markers;
   final bool disableAnimation;
 
-  const HidePopupsOnlyFor._(
-    this.markers, {
-    required this.disableAnimation,
-  }) : super._();
+  const HidePopupsOnlyFor._(this.markers, {required this.disableAnimation})
+    : super._();
 }
 
 class TogglePopupEvent extends PopupEvent {
@@ -122,5 +112,5 @@ class TogglePopupEvent extends PopupEvent {
   final bool disableAnimation;
 
   const TogglePopupEvent._(this.marker, {required this.disableAnimation})
-      : super._();
+    : super._();
 }

@@ -19,7 +19,7 @@ class SimplePopupContainer extends StatefulWidget {
   final FlutterMapState mapState;
   final bool markerRotate;
   final Function(PopupEvent event, List<MarkerData> selectedMarkers)?
-      onPopupEvent;
+  onPopupEvent;
 
   const SimplePopupContainer({
     required this.mapState,
@@ -55,15 +55,16 @@ class _SimplePopupContainerState extends State<SimplePopupContainer>
 
   @override
   Function(PopupEvent event, List<MarkerData> selectedMarkers)?
-      get onPopupEvent => widget.onPopupEvent;
+  get onPopupEvent => widget.onPopupEvent;
 
   @override
   void initState() {
     super.initState();
     _popupEventSubscription = widget.popupController.streamController!.stream
         .listen((PopupEvent popupEvent) => handleAction(popupEvent));
-    _selectedMarkersWithKeys =
-        LinkedHashSet.from(widget.popupController.selectedMarkersWithKeys);
+    _selectedMarkersWithKeys = LinkedHashSet.from(
+      widget.popupController.selectedMarkersWithKeys,
+    );
   }
 
   @override
@@ -91,10 +92,12 @@ class _SimplePopupContainerState extends State<SimplePopupContainer>
 
     return Stack(
       children: _selectedMarkersWithKeys
-          .map((markerWithKey) => inPosition(
-                markerWithKey.marker,
-                popupWithStateKeepAlive(markerWithKey, widget.popupBuilder),
-              ))
+          .map(
+            (markerWithKey) => inPosition(
+              markerWithKey.marker,
+              popupWithStateKeepAlive(markerWithKey, widget.popupBuilder),
+            ),
+          )
           .toList(),
     );
   }
@@ -130,8 +133,10 @@ class _SimplePopupContainerState extends State<SimplePopupContainer>
   }
 
   @override
-  void hidePopupsOnlyFor(List<MarkerData> markers,
-      {required bool disableAnimation}) {
+  void hidePopupsOnlyFor(
+    List<MarkerData> markers, {
+    required bool disableAnimation,
+  }) {
     setState(() {
       _selectedMarkersWithKeys.removeAll(markers.map(MarkerWithKey.wrap));
     });

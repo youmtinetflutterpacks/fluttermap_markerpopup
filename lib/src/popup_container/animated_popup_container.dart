@@ -22,7 +22,7 @@ class AnimatedPopupContainer extends StatefulWidget {
   final PopupAnimation popupAnimation;
   final bool markerRotate;
   final Function(PopupEvent event, List<MarkerData> selectedMarkers)?
-      onPopupEvent;
+  onPopupEvent;
 
   const AnimatedPopupContainer({
     required this.mapState,
@@ -55,7 +55,7 @@ class _AnimatedPopupContainerState extends State<AnimatedPopupContainer>
 
   @override
   Function(PopupEvent event, List<MarkerData> selectedMarkers)?
-      get onPopupEvent => widget.onPopupEvent;
+  get onPopupEvent => widget.onPopupEvent;
 
   final GlobalKey<AnimatedStackState> _animatedStackKey =
       GlobalKey<AnimatedStackState>();
@@ -112,10 +112,8 @@ class _AnimatedPopupContainerState extends State<AnimatedPopupContainer>
       child: AnimatedStack(
         initialItemCount: _animatedStackManager.length,
         key: _animatedStackKey,
-        itemBuilder: (context, index, animation) => _buildPopup(
-          _animatedStackManager[index],
-          animation,
-        ),
+        itemBuilder: (context, index, animation) =>
+            _buildPopup(_animatedStackManager[index], animation),
       ),
     );
   }
@@ -177,14 +175,16 @@ class _AnimatedPopupContainerState extends State<AnimatedPopupContainer>
     required bool disableAnimation,
   }) {
     _animatedStackManager.removeWhere(
-        (markerWithKey) => markersData.contains(markerWithKey.marker));
+      (markerWithKey) => markersData.contains(markerWithKey.marker),
+    );
   }
 
   @override
   void hideAllPopups({required bool disableAnimation}) {
     if (_animatedStackManager.isNotEmpty) {
       _animatedStackManager.clear(
-          duration: disableAnimation ? Duration.zero : null);
+        duration: disableAnimation ? Duration.zero : null,
+      );
     }
   }
 }

@@ -13,11 +13,9 @@ class PopupControllerImpl implements PopupController {
   final Set<MarkerWithKey> selectedMarkersWithKeys;
 
   PopupControllerImpl({List<MarkerData> initiallySelectedMarkers = const []})
-      : selectedMarkersWithKeys = LinkedHashSet.from(
-          initiallySelectedMarkers.map(
-            (marker) => MarkerWithKey(marker),
-          ),
-        );
+    : selectedMarkersWithKeys = LinkedHashSet.from(
+        initiallySelectedMarkers.map((marker) => MarkerWithKey(marker)),
+      );
 
   @override
   List<MarkerData> get selectedMarkers => selectedMarkersWithKeys
@@ -29,10 +27,9 @@ class PopupControllerImpl implements PopupController {
     List<MarkerData> markers, {
     bool disableAnimation = false,
   }) {
-    streamController?.add(PopupEvent.showAlsoFor(
-      markers,
-      disableAnimation: disableAnimation,
-    ));
+    streamController?.add(
+      PopupEvent.showAlsoFor(markers, disableAnimation: disableAnimation),
+    );
   }
 
   @override

@@ -40,9 +40,9 @@ class _MarkerLayerState extends State<MarkerLayer>
 
   // Calling this every time markerOpts change should guarantee proper length
   List<CustomPoint> generatePxCache() => List.generate(
-        widget.layerOptions.markers.length,
-        (i) => widget.map.project(widget.layerOptions.markers[i].point),
-      );
+    widget.layerOptions.markers.length,
+    (i) => widget.map.project(widget.layerOptions.markers[i].point),
+  );
 
   @override
   void initState() {
@@ -92,11 +92,9 @@ class _MarkerLayerState extends State<MarkerLayer>
             continue;
           }
 
-          final pos = pxPoint -
-              widget.map.getNewPixelOrigin(
-                widget.map.center,
-                widget.map.zoom,
-              );
+          final pos =
+              pxPoint -
+              widget.map.getNewPixelOrigin(widget.map.center, widget.map.zoom);
 
           final markerWithGestureDetector = GestureDetector(
             onLongPress: () {
@@ -123,9 +121,11 @@ class _MarkerLayerState extends State<MarkerLayer>
 
           Widget markerWidget;
           if (markerData.marker.rotate ?? markerRotate) {
-            final markerRotateOrigin = markerData.marker.rotateOrigin ??
+            final markerRotateOrigin =
+                markerData.marker.rotateOrigin ??
                 widget.layerOptions.rotateOrigin;
-            final markerRotateAlignment = markerData.marker.rotateAlignment ??
+            final markerRotateAlignment =
+                markerData.marker.rotateAlignment ??
                 widget.layerOptions.rotateAlignment;
 
             // Counter rotated marker to the map rotation

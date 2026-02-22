@@ -16,8 +16,10 @@ abstract class PopupController {
   ///
   /// If [disableAnimation] is true and a popup animation is enabled then the
   /// animation will not be used when showing the popups.
-  void showPopupsAlsoFor(List<MarkerData> markers,
-      {bool disableAnimation = false});
+  void showPopupsAlsoFor(
+    List<MarkerData> markers, {
+    bool disableAnimation = false,
+  });
 
   /// Show the popups only for the given [markers]. All other popups will be
   /// hidden. If a popup is already showing for a given marker it remains
@@ -25,8 +27,10 @@ abstract class PopupController {
   ///
   /// If [disableAnimation] is true and a popup animation is enabled then the
   /// animation will not be used when showing/hiding the popups.
-  void showPopupsOnlyFor(List<MarkerData> markers,
-      {bool disableAnimation = false});
+  void showPopupsOnlyFor(
+    List<MarkerData> markers, {
+    bool disableAnimation = false,
+  });
 
   /// Hide all popups that are showing.
   ///
@@ -38,8 +42,10 @@ abstract class PopupController {
   ///
   /// If [disableAnimation] is true and a popup animation is enabled then the
   /// animation will not be used when hiding the popups.
-  void hidePopupsOnlyFor(List<MarkerData> markers,
-      {bool disableAnimation = false});
+  void hidePopupsOnlyFor(
+    List<MarkerData> markers, {
+    bool disableAnimation = false,
+  });
 
   /// Hide the popup if it is showing for the given [marker], otherwise show it
   /// for that [marker].

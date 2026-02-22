@@ -1,4 +1,5 @@
-# `longpress_popup`
+# longpress_popup
+# This is a Fork of [flutter_map_marker_popup](https://github.com/rorystephenson/flutter_map_marker_popup) by [@rorystephenson](https://github.com/rorystephenson).
 
 [![pub.dev](https://img.shields.io/pub/v/longpress_popup.svg)](https://pub.dev/packages/longpress_popup)
 [![GitHub stars](https://img.shields.io/github/stars/ymrabti/fluttermap_markerpopup?style=social)](https://github.com/ymrabti/fluttermap_markerpopup/stargazers)

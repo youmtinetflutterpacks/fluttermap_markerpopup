@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_map/plugin_api.dart';
+import 'package:vector_math/vector_math_64.dart' show Vector3;
 
 import 'popup_layout.dart';
 
@@ -59,7 +60,7 @@ abstract class SnapToMapLayout {
       rotationAlignment: Alignment.center,
       transformationMatrix: Matrix4.identity()
         ..rotateZ(-mapRotationRad)
-        ..translate(translateX, translateY),
+        ..translateByVector3(Vector3(translateX, translateY, 0.0)),
     );
   }
 }

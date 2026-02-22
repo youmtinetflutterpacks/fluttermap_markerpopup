@@ -1,17 +1,18 @@
 name: longpress_popup
 description: This Flutter package enhances flutter_map by providing an easy way to display a customizable popup widget whenever a user taps on a marker. With this plugin, you can add a personalized touch to your map by creating popups that include images, text, and buttons. You can also use the provided methods to programmatically show and hide popups. Overall, this package simplifies the process of adding interactivity to your maps and provides a seamless user experience.
-version: 2.0.0
+version: 3.0.0
 repository: https://github.com/ymrabti/fluttermap_markerpopup
 homepage: https://github.com/ymrabti
 
 environment:
-  sdk: ">=3.1.0 <4.0.0"
+  sdk: ^3.11.0
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_map: ^5.0.0
   latlong2: ^0.9.0
+  vector_math: ^2.2.0
 
 
 dev_dependencies:

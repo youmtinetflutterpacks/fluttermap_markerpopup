@@ -51,8 +51,6 @@ class PopupLayout {
         return SnapToMapLayout.bottom(mapState);
       case PopupSnap.mapCenter:
         return SnapToMapLayout.center(mapState);
-      default:
-        return SnapToMarkerLayout.top(mapState, marker, markerRotate);
     }
   }
 }

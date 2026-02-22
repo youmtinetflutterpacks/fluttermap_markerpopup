@@ -38,43 +38,61 @@ abstract class PopupCalculations {
   /// rotation.
   static double boundXAtRotation(MarkerData marker, double radians) {
     return OvalBounds.boundX(
-        marker.marker.width, marker.marker.height, radians);
+      marker.marker.width,
+      marker.marker.height,
+      radians,
+    );
   }
 
   /// The distance from the [marker] center to the vertical bounds at a given
   /// rotation.
   static double boundYAtRotation(MarkerData marker, double radians) {
     return OvalBounds.boundY(
-        marker.marker.width, marker.marker.height, radians);
+      marker.marker.width,
+      marker.marker.height,
+      radians,
+    );
   }
 
   static double mapLeftToPointX(
-      FlutterMapState mapState, CustomPoint<num> point) {
+    FlutterMapState mapState,
+    CustomPoint<num> point,
+  ) {
     return point.x.toDouble();
   }
 
   static double mapRightToPointX(
-      FlutterMapState mapState, CustomPoint<num> point) {
+    FlutterMapState mapState,
+    CustomPoint<num> point,
+  ) {
     return -(mapState.size.x - point.x).toDouble();
   }
 
   static double mapCenterToPointX(
-      FlutterMapState mapState, CustomPoint<num> point) {
+    FlutterMapState mapState,
+    CustomPoint<num> point,
+  ) {
     return -(mapState.size.x / 2 - point.x).toDouble();
   }
 
   static double mapTopToPointY(
-      FlutterMapState mapState, CustomPoint<num> point) {
+    FlutterMapState mapState,
+    CustomPoint<num> point,
+  ) {
     return point.y.toDouble();
   }
 
   static double mapBottomToPointY(
-      FlutterMapState mapState, CustomPoint<num> point) {
+    FlutterMapState mapState,
+    CustomPoint<num> point,
+  ) {
     return -(mapState.size.y - point.y).toDouble();
   }
 
   static double mapCenterToPointY(
-      FlutterMapState mapState, CustomPoint<num> point) {
+    FlutterMapState mapState,
+    CustomPoint<num> point,
+  ) {
     return -(mapState.size.y / 2 - point.y).toDouble();
   }
 }

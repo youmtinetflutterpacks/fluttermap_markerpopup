@@ -15,11 +15,7 @@ abstract class OvalBounds {
   static const oneAndAHalfPi = pi * 1.5;
   static const twoPi = pi * 2;
 
-  static Offset boundsAtRotation(
-    double width,
-    double height,
-    double radians,
-  ) {
+  static Offset boundsAtRotation(double width, double height, double radians) {
     final halfWidthSquared = _halfWidthSquared(width);
     final halfHeightSquared = _halfHeightSquared(height);
     final cosThetaSquared = _cosThetaSquared(radians);
@@ -41,11 +37,7 @@ abstract class OvalBounds {
     );
   }
 
-  static double boundX(
-    double width,
-    double height,
-    double radians,
-  ) {
+  static double boundX(double width, double height, double radians) {
     return _boundXImpl(
       _halfWidthSquared(width),
       _halfHeightSquared(height),
@@ -54,11 +46,7 @@ abstract class OvalBounds {
     );
   }
 
-  static double boundY(
-    double width,
-    double height,
-    double radians,
-  ) {
+  static double boundY(double width, double height, double radians) {
     return _boundYImpl(
       _halfWidthSquared(width),
       _halfHeightSquared(height),
@@ -81,8 +69,9 @@ abstract class OvalBounds {
     num cosThetaSquared,
     num sinThetaSquared,
   ) {
-    return sqrt(halfWidthSquared * cosThetaSquared +
-        halfHeightSquared * sinThetaSquared);
+    return sqrt(
+      halfWidthSquared * cosThetaSquared + halfHeightSquared * sinThetaSquared,
+    );
   }
 
   static double _boundYImpl(
@@ -91,7 +80,8 @@ abstract class OvalBounds {
     num cosThetaSquared,
     num sinThetaSquared,
   ) {
-    return sqrt(halfWidthSquared * sinThetaSquared +
-        halfHeightSquared * cosThetaSquared);
+    return sqrt(
+      halfWidthSquared * sinThetaSquared + halfHeightSquared * cosThetaSquared,
+    );
   }
 }
