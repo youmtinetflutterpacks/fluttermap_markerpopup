@@ -99,7 +99,8 @@ class _MapWithPopupsState extends State<MapWithPopups> {
     return FlutterMap(
       options: MapOptions(initialZoom: 5.0, initialCenter: LatLng(44.421, 10.404), onTap: (_, __) => _popupLayerController.hideAllPopups()),
       children: <Widget>[
-        TileLayer(urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', subdomains: <String>['a', 'b', 'c']),
+        //https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png
+        TileLayer(urlTemplate: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png', subdomains: <String>['a', 'b', 'c'], retinaMode: true),
         PopupMarkerLayerWidget(
           options: PopupMarkerLayerOptions(
             markerCenterAnimation: const MarkerCenterAnimation(),

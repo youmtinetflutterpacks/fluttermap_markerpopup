@@ -16,7 +16,7 @@ dependencies:
 
     latlong2: ^0.9.1
     flutter_map: ^8.2.2
-    google_fonts: ^6.3.2
+    google_fonts: ^8.0.2
     longpress_popup:
         path: ../
 
