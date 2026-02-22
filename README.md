@@ -1,6 +1,6 @@
 # longpress_popup
 <div align="center">
-    <img src="https://raw.githubusercontent.com/ymrabti/fluttermap_markerpopup/assets/logo.png" alt="longpress_popup logo" width="120" height="120" style="border-radius: 50%;" />
+    <img src="https://raw.githubusercontent.com/ymrabti/fluttermap_markerpopup/refs/heads/main/assets/logo.png" alt="longpress_popup logo" width="120" height="120" style="border-radius: 50%;" />
 </div>
 
 
