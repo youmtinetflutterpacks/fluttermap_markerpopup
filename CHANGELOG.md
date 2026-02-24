@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Semantic Versioning](https://semver.org/).
 
-## [3.0.3] - 2026-02-22
+## [3.0.3] - 2026-02-24
 ### Added
 - Updated package version to 3.0.3.
 - Updated the README to reflect the new version and any relevant changes.
