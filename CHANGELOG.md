@@ -1,6 +1,9 @@
 # Changelog
 
 All notable changes to this project will be documented in this file. The format is based on [Semantic Versioning](https://semver.org/).
+## [3.0.3+1] - 2026-02-24
+- Updated package version to 3.0.3+1.
+- Hotfix: Addressed a minor issue in the README documentation to ensure clarity and accuracy regarding the latest release information.
 
 ## [3.0.3] - 2026-02-24
 ### Added
