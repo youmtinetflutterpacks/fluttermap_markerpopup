@@ -8,7 +8,7 @@
 .buildlog/
 .history
 .svn/
-
+.wrangler/
 # IntelliJ related
 *.iml
 *.ipr
