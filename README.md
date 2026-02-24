@@ -17,6 +17,7 @@
 
 
 [![Build status](https://github.com/ymrabti/fluttermap_markerpopup/workflows/publish_pub.dev/badge.svg?style=flat&logo=github&colorB=&label=Build)](https://github.com/ymrabti/fluttermap_markerpopup)
+
 🌐 [Watch the demo web release](https://longpress-popup-demo.youmti.net/) &nbsp;|&nbsp; 📦 [Download the latest APK](https://github.com/ymrabti/fluttermap_markerpopup/releases/latest/download/app-release.apk)
 
 
