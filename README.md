@@ -17,7 +17,7 @@
 
 [![Build status](https://github.com/ymrabti/fluttermap_markerpopup/workflows/publish_pub.dev/badge.svg?style=flat&logo=github&colorB=&label=Build)](https://github.com/ymrabti/fluttermap_markerpopup)
 
-🌐 [Watch the demo web release](https://longpress-popup-demo.youmti.net/) &nbsp;|&nbsp; 📦 [Download the latest APK](https://github.com/ymrabti/fluttermap_markerpopup/releases/latest/download/app-release.apk)
+🌐 [Watch the demo web release](https://longpress-popup-demo.youmti.net/) &nbsp;|&nbsp; 📦 [Download the latest APK](https://github.com/ymrabti/fluttermap_markerpopup/releases/latest/download/longpress_popup_demo-release-universal.apk)
 
 </div>
 
@@ -49,7 +49,7 @@ For a minimal code example have a look at [SimpleMapWithPopups](https://github.c
 
 Import the package:
 ```dart
-import 'package:flutter_map_custom_marker_popups/flutter_map_custom_marker_popups.dart';
+import 'package:longpress_popup/longpress_popup.dart';
 
 ```
 Create a `FlutterMap` widget and add a `MarkerLayer`:
