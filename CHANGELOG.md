@@ -1,6 +1,9 @@
 # Changelog
 
 All notable changes to this project will be documented in this file. The format is based on [Semantic Versioning](https://semver.org/).
+## [3.0.3+3] - 2026-02-24
+- Add Docs link to the README to provide users with easy access to detailed documentation and usage instructions for the package.
+
 ## [3.0.3+2] - 2026-02-24
 - Update demo APK filename to reflect the package name and version more clearly, improving clarity for users downloading the demo app.
 
