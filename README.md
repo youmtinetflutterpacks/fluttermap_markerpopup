@@ -17,6 +17,7 @@
 
 
 [![Build status](https://github.com/ymrabti/fluttermap_markerpopup/workflows/publish_pub.dev/badge.svg?style=flat&logo=github&colorB=&label=Build)](https://github.com/ymrabti/fluttermap_markerpopup)
+🌐 [Watch the demo web release](https://longpress-popup-demo.youmti.net/) &nbsp;|&nbsp; 📦 [Download the latest APK](https://github.com/ymrabti/fluttermap_markerpopup/releases/latest/download/app-release.apk)
 
 
 Flutter Map Custom Marker Popups is an extension for the popular Flutter Map package. It allows you to create custom markers that, when long-pressed, open customizable popups containing additional data associated with the marker. This package enhances the interactivity and visual appeal of maps in your Flutter applications.
